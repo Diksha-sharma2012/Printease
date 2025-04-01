@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - PrintEase</title>
+    <!-- Link your main stylesheet (adjust path if needed) -->
+    <link rel="stylesheet" href="STYLES/STYLES.CSS" />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Short Header -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="services.html">SERVICES</a></li>
+        <li><a href="#">ABOUT US</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="page-hero contact-hero">
+        <h1>FIND US</h1>
+      </section>
+
+      <!-- Contact / Map Section -->
+      <section class="contact-map-section">
+        <div class="find-us">
+          <h2>Find Us Here</h2>
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+91-8968590010</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>bhavnishgarg94@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <a href="https://maps.app.goo.gl/vJB3XF7eMNWB2pxS7" target="_blank">
+              Hugli Printing Press Handiaya Bazaar Rd, Barnala, Punjab 148101</a
+            >
+          </div>
+        </div>
+
+        <!-- Google Maps Placeholder -->
+        <div class="map-placeholder">
+          <!-- Replace this <a> with an actual Google Maps embed if you prefer -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d215.13839250945074!2d75.54717491855645!3d30.373272648754615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3910f376559490b9%3A0x2edc362fa9ff6bd4!2sHugli%20Printing%20Press!5e0!3m2!1sen!2sin!4v1742192585148!5m2!1sen!2sin"
+            width="400"
+            height="300"
+            style="border: 2"
+            allowfullscreen="yes"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Contact Form Section -->
+        <div class="footer-contact">
+          <h2>Contact Us</h2>
+          <p>We're here to assist you. Reach out to us anytime.</p>
+          <form action="#" method="post" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+            ></textarea>
+            <button type="submit" class="contact-button">Send</button>
+          </form>
+        </div>
+
+        <!-- Logo + Contact Info -->
+        <div class="footer-info">
+          <div class="footer-logo">LOGO</div>
+          <div class="contact-details">
+            <p><i class="fas fa-phone-alt"></i> +91-8968590010</p>
+            <p><i class="fas fa-envelope"></i> bhavnishgarg94@gmail.com</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i>
+              <a
+                href="https://maps.app.goo.gl/vJB3XF7eMNWB2pxS7"
+                target="_blank"
+              >
+                Hugli Printing Press Handiaya Bazaar Rd, Barnala, Punjab
+                148101</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>COPYRIGHT PHANTOM SOLUTIONS</p>
+      </div>
+    </footer>
+  </body>
+</html>

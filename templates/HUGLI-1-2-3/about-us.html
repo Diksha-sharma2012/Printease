@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Hugli Printing Press</title>
+    <link rel="stylesheet" href="STYLES/STYLES.CSS" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* About Us Page Styles */
+      .about-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("assets/Printing-Press.jpeg");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .service-highlight {
+        padding: 60px 0;
+        background-color: #f9f9f9;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        font-size: 2.5rem;
+        color: #0056b3;
+        margin-bottom: 15px;
+      }
+
+      .mission-section {
+        padding: 60px 0;
+        background-color: #0056b3;
+        color: white;
+      }
+
+      .mission-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 30px;
+        margin-bottom: 30px;
+        height: 100%;
+      }
+
+      .map-container {
+        height: 400px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-content {
+        padding: 60px 0;
+      }
+
+      .quality-badge {
+        display: inline-block;
+        background: #28a745;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="services.html">SERVICES</a></li>
+        <li><a href="about.html" class="active">ABOUT US</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="container">
+        <h1>ABOUT HUGLI PRINTING PRESS</h1>
+        <p class="lead">
+          Innovative printing solutions for modern businesses since 2010
+        </p>
+      </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <span class="quality-badge">Quality Guaranteed</span>
+            <h2>Your Trusted Printing Partner</h2>
+            <p>
+              Founded in 2010, Hugli Printing Press has grown from a small local
+              print shop to one of North India's most trusted printing service
+              providers. Our journey has been marked by consistent innovation,
+              uncompromising quality, and a customer-first approach that has
+              earned us long-term partnerships with businesses across multiple
+              industries.
+            </p>
+            <p>
+              With state-of-the-art printing technology and a team of skilled
+              craftsmen, we bridge the gap between traditional printing
+              excellence and modern digital innovation. Our facility in Barnala
+              houses some of the most advanced printing equipment in the region,
+              including Komori offset presses and Xerox digital presses.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <div class="map-container">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3433.071981521639!2d75.54717491855645!3d30.373272648754615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3910f376559490b9%3A0x2edc362fa9ff6bd4!2sHugli%20Printing%20Press!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Highlights -->
+    <section class="service-highlight">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2>Our Printing Expertise</h2>
+          <p class="lead">
+            Comprehensive solutions for all your printing needs
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-id-card"></i>
+              </div>
+              <h3>Die Cut Business Cards</h3>
+              <p>
+                As India's leading Die Cut Card Manufacturer, we specialize in
+                precision-cut visiting cards that make your brand stand out. Our
+                proprietary cutting technology ensures flawless edges every
+                time.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-gem"></i>
+              </div>
+              <h3>Premium Business Cards</h3>
+              <p>
+                From luxurious velvet finishes to sleek PVC cards, our premium
+                range offers unmatched quality. Choose from matt, gloss,
+                embossed, or specialty finishes to perfectly represent your
+                brand.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <h3>Leaflets & Posters</h3>
+              <p>
+                Produced on our presses using premium quality paper, our
+                marketing materials deliver vibrant colors and sharp details
+                that capture attention and communicate your message effectively.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-tags"></i>
+              </div>
+              <h3>Stickers & Labels</h3>
+              <p>
+                Our extensive sticker range includes options with half-cut
+                precision and protective lamination, perfect for product
+                labeling, promotions, and brand identification.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-wallet"></i>
+              </div>
+              <h3>ATM Pouches</h3>
+              <p>
+                The innovative alternative to traditional business cards, our
+                ATM pouches combine functionality with brand visibility. Minimum
+                order quantity of just 1000 units makes them accessible for
+                businesses of all sizes.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <h3>Garment Tags</h3>
+              <p>
+                With minimum orders starting at 2000 pieces, we offer apparel
+                tags in various sizes and premium quality options, helping
+                clothing brands maintain a professional image at competitive
+                prices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="mission-card">
+              <h3><i class="fas fa-eye"></i> Our Vision</h3>
+              <p>
+                To revolutionize India's printing industry by creating a unified
+                platform that empowers printers nationwide. We aim to foster
+                collaboration, innovation, and collective growth while extending
+                welfare initiatives to support printing professionals across the
+                country.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="mission-card">
+              <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+              <p>
+                To establish India as a global leader in printing technology
+                through continuous innovation. We're committed to developing
+                cutting-edge printing solutions that serve both domestic and
+                international markets while maintaining sustainable business
+                practices.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="mission-card">
+              <h3><i class="fas fa-handshake"></i> Our Promise</h3>
+              <p>
+                Exclusive B2B services tailored for printers and advertising
+                agencies. We guarantee premium quality, strict adherence to
+                timelines, and transparent pricing that delivers exceptional
+                value. Our no-compromise approach ensures you always receive
+                products that exceed expectations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2>Advanced Printing Technology</h2>
+            <p>
+              At Hugli Printing Press, we invest in the latest printing
+              technology to deliver unmatched quality:
+            </p>
+            <ul class="list-unstyled">
+              <li>
+                <i class="fas fa-check text-primary me-2"></i> Komori Lithrone
+                offset presses for superior commercial printing
+              </li>
+              <li>
+                <i class="fas fa-check text-primary me-2"></i> Xerox 3100
+                Digital Press for high-volume digital jobs
+              </li>
+              <li>
+                <i class="fas fa-check text-primary me-2"></i> Precision
+                die-cutting equipment for complex shapes
+              </li>
+              <li>
+                <i class="fas fa-check text-primary me-2"></i> Automated
+                finishing systems for consistent quality
+              </li>
+              <li>
+                <i class="fas fa-check text-primary me-2"></i> Pantone-certified
+                color matching system
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <img
+              src="assets/printing-machines.jpg"
+              alt="Printing Machines"
+              class="img-fluid rounded shadow"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-contact">
+          <h2>Contact Us</h2>
+          <form action="#" method="post" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+            ></textarea>
+            <button type="submit" class="contact-button">Send</button>
+          </form>
+        </div>
+
+        <div class="footer-info">
+          <div class="footer-logo">LOGO</div>
+          <div class="contact-details">
+            <p><i class="fas fa-phone-alt"></i> +91-8968590010</p>
+            <p><i class="fas fa-envelope"></i> bhavnishgarg94@gmail.com</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Hugli Printing Press,
+              Handiaya Bazaar Rd, Barnala, Punjab 148101
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>COPYRIGHT PHANTOM SOLUTIONS</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

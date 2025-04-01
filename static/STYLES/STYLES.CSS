@@ -1,0 +1,690 @@
+/* ================================
+   GLOBAL STYLES
+================================ */
+body {
+  background-color: #ffffff;
+
+  color: #2d2d2d; /* Dark gray text */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+     HEADER & NAVIGATION
+  ================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: linear-gradient(to right, #1e96ff, #90c4ff);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: solid;
+  color: #eaeaea; /* Soft white */
+  font-weight: bold;
+  text-shadow: 0 0 10px #7e7e7e85, 0 0 20px #8c8c8c75, 0 0 20px #272727,
+    0 0 40px #454545, 0 0 50px #424242; /* Glowing effect */
+}
+
+/* ================================
+     HERO SECTION
+  ================================ */
+/* Use .hero or .page-hero for your intro area */
+.hero,
+.page-hero {
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(to right, #1e96ff, #90c4ff);
+  color: #eaeaea;
+  font-family: "Bebas Neue", sans-serif; /* Apply the new font */
+  font-weight: 600; /* Make the font weight bolder */
+  font-size: 36px; /* Larger font size for prominence */
+  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
+  line-height: 1.4; /* Adjust line height for better readability */
+  text-transform: uppercase; /* Optional: Make the text uppercase for emphasis */
+  -webkit-text-stroke: 1px #2e517a; /* Outline effect (works in WebKit browsers like Chrome, Safari) */
+  text-shadow: 1px #2a517e; /* For other browsers */
+}
+.hero h3 {
+  font-style: italic;
+}
+
+/* ================================
+     FEATURE SECTION (Optional)
+  ================================ */
+.feature-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background-color: linear-gradient(
+    to right,
+    #f5e6da,
+    #787d83
+  ); /* Light background */
+}
+
+.feature-container {
+  display: flex;
+  max-width: 1200px;
+  gap: 40px;
+  align-items: center;
+}
+
+.feature-image img {
+  width: 75%; /* Reduces image to one-fourth of its original size */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Removes extra spacing */
+}
+
+.feature-content {
+  max-width: 600px;
+}
+
+.feature-content h2 {
+  color: #354f52;
+}
+
+.feature-content p {
+  color: #4a4a4a;
+}
+
+.feature-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #4a90e2;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.feature-button:hover {
+  background: #357abd;
+}
+
+/* ================================
+     SERVICES SECTION
+  ================================ */
+.services {
+  text-align: center;
+  padding: 50px;
+  background: #d6eaf8; /* Light blue background */
+}
+
+.services h1 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #2d2d2d;
+}
+
+/* Responsive grid layout for service boxes */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 50px;
+  justify-items: center;
+}
+
+/* Each service box (button) */
+.service-item {
+  display: flex;
+  flex-direction: column; /* Icon above text */
+  align-items: center;
+  justify-content: center;
+  width: 180px; /* Adjust size as needed */
+  height: 180px; /* Square shape */
+  background-color: #f0f0f0; /* Light gray background */
+  border: 2px solid #ccc; /* Subtle border */
+  border-radius: 10px; /* Rounded corners */
+  text-decoration: none; /* Remove link underline */
+  color: #2d2d2d; /* Text color */
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  position: relative;
+  overflow: hidden;
+}
+
+.service-item i {
+  font-size: 24px; /* Icon size */
+  margin-bottom: 8px; /* Space between icon and text */
+}
+
+.service-item span {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Hover effect on service boxes */
+.service-item:hover {
+  transform: translateY(-2px);
+  background-color: #eaeaea;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ================================
+     RECENT ORDERS SECTION
+  ================================ */
+.recent-orders {
+  padding: 50px 20px;
+  background: #f5e6da; /* Light beige */
+  text-align: center;
+}
+
+.recent-orders h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #2d2d2d;
+}
+
+/* Responsive wrapper for orders table */
+.orders-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto; /* Enables horizontal scroll on small screens */
+}
+
+/* Orders Table */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.orders-table th {
+  background: #6db3f2;
+  color: #eaeaea;
+}
+
+.orders-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+/* "Show More" Button */
+.show-more-orders {
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff7b00, #ff4500);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.show-more-orders:hover {
+  background: linear-gradient(to right, #ff4500, #ff7b00);
+}
+
+/* ================================
+     FOOTER SECTION
+  ================================ */
+footer {
+  background-color: #f0ceb2; /* Footer background */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.footer-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer-bottom {
+  font-size: 8px;
+  text-align: center;
+  width: 100%;
+  padding-top: 20px;
+  text-align: left;
+}
+
+/* Footer Contact Form */
+.footer-contact {
+  flex: 1;
+  max-width: 33%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-contact h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  background: linear-gradient(to right, #ff7b00, #ff4500);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.contact-form button:hover {
+  background: linear-gradient(to right, #ff4500, #ff7b00);
+}
+
+/* Footer Menu & Info */
+.footer-menu,
+.footer-info {
+  flex: 1;
+  max-width: 33%;
+  text-align: center;
+}
+
+/* Vertical Menu Section */
+.footer-menu {
+  width: 25%; /* Increased width for balance */
+  min-width: 220px; /* Prevents shrinking */
+}
+
+.footer-menu ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+.footer-menu h2 {
+  font-size: 24px; /* Make it larger */
+  font-weight: bold;
+  text-decoration: underline; /* Underline "Menu" */
+  color: #333; /* Darker color */
+  margin-bottom: 15px; /* Extra space below */
+  text-transform: uppercase; /* Makes text all caps */
+  line-height: 3;
+}
+
+.footer-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-menu ul li {
+  margin-bottom: 30px; /* Increase spacing between items */
+  line-height: 2.4; /* Increases line spacing */
+}
+.footer-menu ul li a {
+  text-decoration: none;
+  font-size: 18px; /* Increase font size */
+  color: black;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.footer-menu ul li a:hover {
+  color: #ff7b00;
+}
+
+/* Contact Info Section */
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 30%;
+}
+
+.footer-logo {
+  width: 100px;
+  height: 100px;
+  background: #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.footer-icons {
+  margin-top: 10px;
+}
+
+.footer-icons i {
+  font-size: 20px;
+  margin: 5px;
+  color: black;
+}
+
+.footer-icons i:hover {
+  color: #ff7b00;
+}
+
+/* Prevent footer sections from shrinking too much */
+.footer-contact,
+.footer-menu,
+.footer-info {
+  min-width: 280px;
+}
+
+/* ================================
+     RESPONSIVE DESIGN
+  ================================ */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+
+  nav ul {
+    gap: 10px;
+  }
+
+  .hero,
+  .page-hero {
+    padding: 30px;
+  }
+
+  .services {
+    padding: 30px;
+  }
+
+  .service-item {
+    width: 120px;
+    height: 120px;
+  }
+
+  .orders-wrapper {
+    padding: 0 10px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-contact,
+  .footer-menu,
+  .footer-info {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+/* CONTACT PAGE HERO */
+.contact-hero {
+  /* If you want a different background from other pages */
+  background: linear-gradient(to right, #1e96ff, #90c4ff);
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* CONTACT & MAP SECTION */
+.contact-map-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Allows stacking on small screens */
+  padding: 50px 20px;
+  background-color: #f5e6da; /* Matches your theme */
+}
+
+/* Left side: Find Us Here */
+.find-us {
+  max-width: 400px;
+  margin-bottom: 20px;
+  font-size: large;
+  font-style: bold;
+}
+.find-us h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #2d2d2d;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.contact-item i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #4a90e2; /* Icon color */
+}
+.contact-item span {
+  font-size: 16px;
+  color: #2d2d2d;
+}
+
+/* Right side: Map Placeholder or Link */
+.map-placeholder {
+  width: 400px;
+  height: 300px;
+  background-color: #ccc; /* Placeholder color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.map-link {
+  color: #2d2d2d;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.map-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-map-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .map-placeholder,
+  .find-us {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
+}
+/* Hero section specific to service pages */
+.service-hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(to right, #6db3f2, #4a90e2);
+  color: #fff;
+}
+
+/* Container for the entire page's content */
+.service-page-content {
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+/* Each main category block */
+.service-category {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  background: #fff;
+}
+
+.service-category:hover {
+  transform: translateY(-5px);
+}
+
+.service-category h2 {
+  background-color: #f0f0f0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 15px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+/* Each sub-option within a category */
+.service-option {
+  background: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+.service-option h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #333;
+}
+.service-option p {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* The 'Select' button */
+.select-button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease-in-out;
+  display: block;
+  width: 100%;
+}
+.select-button:hover {
+  background-color: #0056b3;
+}
+
+/* poster page */
+.upload-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.image-preview {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 8px;
+  margin-top: 15px;
+  display: none;
+}
+
+/* atm pounches */
+.container-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+.quantity-input {
+  width: 80px;
+}
+body.order-page {
+  font-family: Arial, sans-serif;
+  background-color: #f8f5e4; /* Yellowish off-white */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1.order-title {
+  color: #b8860b; /* Gold color */
+  margin-top: 20px;
+}
+
+form.order-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label.order-label {
+  font-weight: bold;
+}
+
+input.order-input,
+select.order-select,
+textarea.order-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea.order-textarea {
+  height: 100px;
+}
+
+button.order-button {
+  background-color: #b8860b; /* Gold */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.order-button:hover {
+  background-color: #a57500;
+}
+.logo img {
+  width: 300px; /* Adjust size as needed */
+  height: auto; /* Keeps aspect ratio */
+  display: block; /* Removes extra spacing */
+  background-color: #a4c2e0d8;
+}
