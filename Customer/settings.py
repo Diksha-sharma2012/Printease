@@ -108,7 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE =  'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -131,8 +132,32 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'services'
 LOGIN_URL = 'login'
 
+
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Forces session expiration on browser close
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default session backend
+SESSION_COOKIE_AGE = 3600  # Session expires in 1 hour
+SESSION_SAVE_EVERY_REQUEST = True  # Ensure session updates every request
+
 
 MEDIA_ROOT = BASE_DIR / "media"
 print(MEDIA_ROOT, "media")
 MEDIA_URL = '/media/'
+
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your-email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'your-app-password'
+# DEFAULT_FROM_EMAIL = 'PrintEase <your-email@gmail.com>'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'PrintEase <dikshasharma1282020@gmail.com>'
+
+# AUTH_USER_MODEL = 'printease.UserModel'
+
+
+
+

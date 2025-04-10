@@ -2,7 +2,7 @@
    GLOBAL STYLES
 ================================ */
 body {
-  background-color: #ffffff;
+  background-color: #ecc5c0;
 
   color: #2d2d2d; /* Dark gray text */
   font-family: Arial, sans-serif;
@@ -13,27 +13,101 @@ body {
 /* ================================
      HEADER & NAVIGATION
   ================================ */
-header {
+.navbar {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 50px;
-  background: linear-gradient(to right, #1e96ff, #90c4ff);
+  background-color: #6ca8e3;
+  /* background: linear-gradient(to right, #3c6e71, #294b4d); */
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  height: 55px;
+  z-index: 10000;
+
+  /* display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px; */
 }
 
-nav ul {
-  list-style: none;
+.navbar .logo img {
+  margin-top: -10px;
+  margin-left: 100px;
+  background-color: transparent;
+  width: 180px;
+  height: 42px;
+}
+
+.navbar .nav-links {
   display: flex;
-  gap: 20px;
+  list-style: none;
+  margin-top: 10px;
+  margin-right: 85px;
   padding: 0;
 }
 
-nav ul li a {
-  text-decoration: solid;
-  color: #eaeaea; /* Soft white */
-  font-weight: bold;
-  text-shadow: 0 0 10px #7e7e7e85, 0 0 20px #8c8c8c75, 0 0 20px #272727,
-    0 0 40px #454545, 0 0 50px #424242; /* Glowing effect */
+.navbar .nav-links li {
+  margin-left: 50px;
+}
+
+.navbar .nav-links a {
+  color: rgb(58, 57, 57);
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.navbar .nav-links a:hover {
+  color: white;
+  background-color: #303231;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.navbar .menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.navbar .menu-toggle span {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin-bottom: 4px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: linear-gradient(to right, #3c6e71, #294b4d);
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin: 0;
+    padding: 15px 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .navbar .menu-toggle {
+    display: flex;
+  }
 }
 
 /* ================================
@@ -44,21 +118,36 @@ nav ul li a {
 .page-hero {
   text-align: center;
   padding: 50px;
-  background: linear-gradient(to right, #1e96ff, #90c4ff);
-  color: #eaeaea;
-  font-family: "Bebas Neue", sans-serif; /* Apply the new font */
+  background-color: #6ca8e3;
+  /* background: linear-gradient(to right, #3c6e71, #294b4d); */
+  color: rgb(58, 57, 57);
+  font-family: Impact, "Arial Narrow Bold", sans-serif; /* Apply the new font */
   font-weight: 600; /* Make the font weight bolder */
-  font-size: 36px; /* Larger font size for prominence */
+  font-size: 40px; /* Larger font size for prominence */
   letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
   line-height: 1.4; /* Adjust line height for better readability */
   text-transform: uppercase; /* Optional: Make the text uppercase for emphasis */
-  -webkit-text-stroke: 1px #2e517a; /* Outline effect (works in WebKit browsers like Chrome, Safari) */
-  text-shadow: 1px #2a517e; /* For other browsers */
+  /* -webkit-text-stroke: 1px #1a1b1b; Outline effect (works in WebKit browsers like Chrome, Safari) */
+  text-shadow: 4px #101113; /* For other browsers */
 }
 .hero h3 {
   font-style: italic;
 }
+.hero {
+  position: relative;
+  text-align: center;
+}
 
+/* .hero::before {
+  content: "";
+  background: url("assets/cropped_logo.png") no-repeat;
+  background-size: contain;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+} */
 /* ================================
      FEATURE SECTION (Optional)
   ================================ */
@@ -67,11 +156,7 @@ nav ul li a {
   align-items: center;
   justify-content: center;
   padding: 50px;
-  background-color: linear-gradient(
-    to right,
-    #f5e6da,
-    #787d83
-  ); /* Light background */
+  background: linear-gradient(to bottom, #ecc5c0, #ecc5c0);
 }
 
 .feature-container {
@@ -79,10 +164,19 @@ nav ul li a {
   max-width: 1200px;
   gap: 40px;
   align-items: center;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.12) 20%,
+    rgba(0, 0, 0, 0.12) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  padding: 40px; /* Increased padding */
+  border-radius: 10px; /* Optional: Add rounded corners for a softer look */
 }
 
 .feature-image img {
-  width: 75%; /* Reduces image to one-fourth of its original size */
+  width: 90%; /* Reduces image to one-fourth of its original size */
   height: auto; /* Maintains aspect ratio */
   display: block; /* Removes extra spacing */
 }
@@ -93,6 +187,19 @@ nav ul li a {
 
 .feature-content h2 {
   color: #354f52;
+  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
+  line-height: 1.4; /* Adjust line height for better readability */
+  text-transform: uppercase; /* Optional: Make the text uppercase for emphasis */
+  -webkit-text-stroke: 1px #0f3765; /* Outline effect (works in WebKit browsers like Chrome, Safari) */
+  text-shadow: 1px #2a517e; /* For other browsers */
+}
+.feature-content h5 {
+  color: #4a4a4a;
+  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
+  line-height: 1.4; /* Adjust line height for better readability */
+  text-transform: uppercase; /* Optional: Make the text uppercase for emphasis */
+  -webkit-text-stroke: 1px #0f3765; /* Outline effect (works in WebKit browsers like Chrome, Safari) */
+  text-shadow: 1px #2a517e; /* For other browsers */
 }
 
 .feature-content p {
@@ -120,9 +227,15 @@ nav ul li a {
 .services {
   text-align: center;
   padding: 50px;
-  background: #d6eaf8; /* Light blue background */
+  background: linear-gradient(
+    to bottom,
+    #d6eaf8,
+    #f5e6da
+  ); /* Light blue background */
 }
-
+.services .hero {
+  font-family: "Bebas Neue", sans-serif;
+}
 .services h1 {
   margin-bottom: 30px;
   font-size: 28px;
@@ -237,7 +350,9 @@ nav ul li a {
      FOOTER SECTION
   ================================ */
 footer {
-  background-color: #f0ceb2; /* Footer background */
+  background-color: #3c6e71; /* Footer background */
+  padding: 30px 20px;
+  position: relative;
 }
 
 .footer-container {
@@ -249,6 +364,7 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 0;
+  gap: 40px;
 }
 
 .footer-container::after {
@@ -273,6 +389,7 @@ footer {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 400px;
 }
 
 .footer-contact h2 {
@@ -288,10 +405,15 @@ footer {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.contact-form textarea {
+  min-height: 110px; /* Increase textarea height */
+  resize: vertical; /* Allows users to resize it */
+}
 
 .contact-form button {
-  background: linear-gradient(to right, #ff7b00, #ff4500);
-  color: white;
+  background: linear-gradient(to right, #ff7b00, gold);
+  color: black;
+  font-weight: bold;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -315,6 +437,15 @@ footer {
 .footer-menu {
   width: 25%; /* Increased width for balance */
   min-width: 220px; /* Prevents shrinking */
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 20%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  padding: 20px; /* Increased padding */
+  border-radius: 10px; /* Optional: Add rounded corners for a softer look */
 }
 
 .footer-menu ul {
@@ -354,23 +485,34 @@ footer {
 
 /* Contact Info Section */
 .footer-info {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 30%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.1) 20%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  padding: 20px; /* Increased padding */
+  border-radius: 10px; /* Optional: Add rounded corners for a softer look */
 }
 
 .footer-logo {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   background: #ddd;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
+  margin-bottom: 40px;
 }
 
 .footer-icons {
@@ -439,7 +581,7 @@ footer {
 /* CONTACT PAGE HERO */
 .contact-hero {
   /* If you want a different background from other pages */
-  background: linear-gradient(to right, #1e96ff, #90c4ff);
+  background: linear-gradient(to right, #0e8dfd, #4ea0ff);
   color: #fff;
   text-align: center;
   padding: 60px 20px;
@@ -466,6 +608,7 @@ footer {
   font-size: 24px;
   margin-bottom: 15px;
   color: #2d2d2d;
+  padding-bottom: 40px;
 }
 .contact-item {
   display: flex;
@@ -526,6 +669,8 @@ footer {
 
 /* Container for the entire page's content */
 .service-page-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
   width: 90%;
   max-width: 1200px;
   margin: 30px auto;
@@ -533,11 +678,13 @@ footer {
 
 /* Each main category block */
 .service-category {
+  margin: 10px;
+  display: flex;
   border: none;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-  background: #fff;
+  background: #e5e8e8;
 }
 
 .service-category:hover {
@@ -545,7 +692,8 @@ footer {
 }
 
 .service-category h2 {
-  background-color: #f0f0f0;
+  width: 300px;
+
   font-size: 1.2rem;
   font-weight: bold;
   padding: 15px;
@@ -559,8 +707,22 @@ footer {
   padding: 8px;
   font-size: 0.9rem;
 }
+
+/* image container inside services */
+.service-img {
+  display: flex;
+  width: 200px;
+  height: 250px;
+  /* border:solid black 10px; */
+  box-shadow: 0px 2px 4px black;
+}
+.service-img img {
+  max-width: 200px;
+  /* min-height:250px; */
+}
 /* Each sub-option within a category */
 .service-option {
+  width: 300px;
   background: #fff;
   margin: 10px 0;
   padding: 15px;
@@ -687,4 +849,76 @@ button.order-button:hover {
   height: auto; /* Keeps aspect ratio */
   display: block; /* Removes extra spacing */
   background-color: #a4c2e0d8;
+}
+/* Services Section */
+.printing-services {
+  padding: 40px 20px;
+  background-color: #ecc5c0;
+  text-align: center;
+}
+
+/* Title */
+.printing-services h2 {
+  font-size: 1.4rem;
+  color: #2b8c66;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+/* Grid Layout */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  column-gap: 5px; /* Reduce column gap */
+  row-gap: 10px; /* Reduce row gap */
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Individual Service Box */
+.service-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 25px; /* Increase padding */
+  min-height: 260px; /* Larger height */
+  min-width: 300px;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.service-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon Styling */
+.service-icon {
+  background-color: #2b8c66;
+  color: white;
+  font-size: 22px;
+  padding: 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 12px;
+}
+
+/* Text Section */
+.service-content h3 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.service-content p {
+  font-size: 0.8rem; /* Slightly smaller text */
+  color: #555;
+  line-height: 1.4;
 }
