@@ -3,18 +3,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
-from .models import FilesUpload, Order
+from .models import FilesUpload, Order, OrderBillModel, OrderLetterModel
+from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
-from django.template.loader import render_to_string
-from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from .forms import SignUpForm, CustomLoginForm
 from django.contrib.auth.models import User
+
 
 
 ######################################SIGNIN-LOGIN#########################################
@@ -40,6 +37,7 @@ def signup_view(request):
         form = SignUpForm()
     return render(request, 'HUGLI-1-2-3/signin-login/signup.html', {'form': form})
 
+
 def login_view(request):
     if request.method == 'POST':
         form = CustomLoginForm(data=request.POST)
@@ -62,7 +60,6 @@ def login_view(request):
         form = CustomLoginForm()
 
     return render(request, 'HUGLI-1-2-3/signin-login/login.html', {'form': form})
-
 
 
 def logout_view(request):
@@ -111,8 +108,6 @@ def logout_view(request):
 #
 
 
-
-
 ##########################FRONTEND###########################################
 
 
@@ -128,6 +123,7 @@ def services_view(request):
 
 def about_us_view(request):
     return render(request, 'HUGLI-1-2-3/frontend/about-us.html')
+
 
 def contact_us_view(request):
     return render(request, 'HUGLI-1-2-3/frontend/contact.html')
@@ -149,8 +145,6 @@ def atm_pouches_view(request):
 
         user = request.user
 
-        print(user.email,"email")
-        print(user.id)
         # Ensure user has an ID (user is saved in DB)
         if not user.id:
             return render(request, 'HUGLI-1-2-3/frontend/atm-pouches.html', {
@@ -180,54 +174,165 @@ def atm_pouches_view(request):
         print("error")
     return render(request, 'HUGLI-1-2-3/frontend/atm-pouches.html')
 
+
 def digital_paper_view(request):
-    if request.method == "POST":
-        cards = request.POST.get("digital-paper")
-        print(cards)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': cards})
     return render(request, 'HUGLI-1-2-3/frontend/digital-paper.html')
 
+
 def envelopes_view(request):
+    if request.method == "POST":
+        envelopes = request.POST.get("envelopes")
+        quantity = request.POST.get("quantity")
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': envelopes, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/envelopes.html')
 
+
 def files_view(request):
+    if request.method == "POST":
+        files = request.POST.get("files")
+        quantity = request.POST.get("quantity")
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': files, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/files.html')
 
+
 def garment_tags_view(request):
+    if request.method == "POST":
+        pamphlet_paper = request.POST.get("garment-tags")
+        quantity = request.POST.get("quantity")
+        print(pamphlet_paper)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': pamphlet_paper, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/garment-tags.html')
 
-def order_view(request):
-    return render(request, 'HUGLI-1-2-3/frontend/order.html')
 
 def pamphlets_view(request):
     if request.method == "POST":
-        cards = request.POST.get("pamphlets_paper")
-        print(cards)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html',{'cards':cards})
+        pamphlet_paper = request.POST.get("pamphlet-paper")
+        quantity = request.POST.get("quantity")
+        print(pamphlet_paper)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': pamphlet_paper, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/pamphlets.html')
 
-def visiting_cards_view(request,):
+
+def visiting_cards_view(request, ):
     if request.method == "POST":
-        cards = request.POST.get("visiting_cards")
-        print(cards)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html',{'cards':cards})
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
+        quantity = request.POST.get("quantity")
+        print(product_name, product_type)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type,
+                                                                      "quantity": quantity,
+                                                                      "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/visiting-cards.html')
 
 
 def pens_view(request):
+    if request.method == "POST":
+        cards = request.POST.get("pens")
+        quantity = request.POST.get("quantity")
+        print(quantity)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': cards, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/pens.html')
 
+
 def stickers_view(request):
+    if request.method == "POST":
+        card = request.POST.get("card")
+        quantity = request.POST.get("quantity")
+        print(quantity)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': card, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/stickers.html')
 
+
+
 def letter_heads_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.method == 'POST':
+        try:
+            # Get form data with proper field names
+            order_data = {
+                'order_type': request.POST.get('order_type', 'Letterhead'),
+                'company_name': request.POST.get('company_name'),
+                'address': request.POST.get('address'),
+                'paper_type': request.POST.get('paper_type'),
+                'paper_size': request.POST.get('paper_size'),
+                'quantity': request.POST.get('quantity'),
+                'logo': request.FILES.get('logo'),
+                'user': request.user
+            }
+
+            # Validate required fields
+            required_fields = ['company_name', 'address', 'paper_type', 'paper_size', 'quantity']
+            for field in required_fields:
+                if not order_data.get(field):
+                    raise ValueError(f"Missing required field: {field}")
+
+            # Create and save order
+            letter_head = OrderLetterModel(**order_data)
+            letter_head.full_clean()  # Validate model fields
+            letter_head.save()
+
+            messages.success(request, 'Order placed successfully!')
+            return redirect('view-letter-orders')
+
+        except Exception as e:
+            messages.error(request, f'Error processing order: {str(e)}')
+            return redirect('letter-heads')
+
+    # GET request handling
     return render(request, 'HUGLI-1-2-3/frontend/letterhead.html')
 
+
+
 def shooting_view(request):
+    if request.method == "POST":
+        card = request.POST.get("target")
+        quantity = request.POST.get("quantity")
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': card, "quantity": quantity})
     return render(request, 'HUGLI-1-2-3/frontend/targets.html')
 
+
+# views.py
+
 def bill_books_view(request):
-    return render(request, 'HUGLI-1-2-3/frontend/billbooks.html')
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.method == 'POST':
+        # Retrieve form data including the uploaded file
+        order_type = request.POST.get('order_type')
+        company_name = request.POST.get('company_name')
+        address = request.POST.get('address')
+        bill_book_order_type = request.POST.get('bill_book_order_type')
+        paper_size = request.POST.get('paper_size')
+        number_of_books = request.POST.get('number_of_books')
+        pages_per_book = request.POST.get('pages_per_book', '')
+        logo = request.FILES.get('logo')
+
+        user = request.user
+
+        # Create and save the model instance with the logo
+        bill_book = OrderBillModel(
+            order_type=order_type,
+            company_name=company_name,
+            address=address,
+            paper_type=bill_book_order_type,
+            paper_size=paper_size,
+            number_of_book=number_of_books,
+            page_per_book=pages_per_book,
+            user=user,
+            logo=logo
+        )
+        bill_book.save()  # This will save the file to MEDIA_ROOT/billbook_logos/
+
+        return redirect('bill-books')
+
+    # Fetch all orders for display
+    billbook_orders = OrderBillModel.objects.all()
+    return render(request, 'HUGLI-1-2-3/frontend/billbooks.html', {'billbook_orders': billbook_orders})
+
+
 
 @login_required
 def checkout_view(request):
@@ -238,22 +343,21 @@ def checkout_view(request):
         address = request.POST.get('address')
         pincode = request.POST.get('pincode')
         notes = request.POST.get('notes')
-        product_name = request.POST.get('product', '')
-        quality=request.POST.get('quality')
+        product_type = request.POST.get('product_type', '')
+        product_name = request.POST.get('product_name')
         quantity = request.POST.get('quantity', 1)
 
         user = request.user
         user_model = User.objects.get(id=user.id)
 
-
-        print(name,"name")
+        print(name, "name")
         print(email)
         print(phone)
         print(address)
         print(pincode)
         print(notes)
         print(product_name)
-        print(quality)
+        print(product_type)
         print(quantity)
         # Save order
         order = Order(
@@ -264,9 +368,9 @@ def checkout_view(request):
             pincode=pincode,
             notes=notes,
             product_name=product_name,
-            quality=quality,
+            product_type=product_type,
             quantity=quantity,
-            user = user_model
+            user=user_model
         )
         order.save()
         return render(request, 'HUGLI-1-2-3/frontend/services.html')
@@ -275,52 +379,69 @@ def checkout_view(request):
     return render(request, 'HUGLI-1-2-3/frontend/checkout.html')
 
 
-
-# @login_required
-def order_view(request):
-    return render(request, 'HUGLI-1-2-3/frontend/order.html')
-
-
-
-
-
 ############################## DASHBOARD ##################################
-
+@staff_member_required
+# @login_required
 def admin_dashboard(request):
     return render(request, 'HUGLI-1-2-3/dashboard/admin_dashboard.html')
 
-# Helper: check if user is staff (admin)
+@staff_member_required
+# @login_required
 def is_admin(user):
     return user.is_staff
 
+
 # Admin dashboard users view
+@staff_member_required
 # @login_required
-# @user_passes_test(is_admin)
 def view_users(request):
     users = User.objects.all().order_by('-date_joined')
     return render(request, 'HUGLI-1-2-3/dashboard/view_users.html', {'users': users})
 
+
+@staff_member_required
+# @login_required
 def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if user and not user.is_superuser:
-     user.delete()
+        user.delete()
     return redirect('view-users')
 
 
+@staff_member_required
+# @login_required
 def view_orders(request):
     orders = Order.objects.all().order_by('-order_date')
     return render(request, 'HUGLI-1-2-3/dashboard/view_orders.html', {'orders': orders})
 
+
+@staff_member_required
+# @login_required
+def delete_order(request, order_id):
+    if request.method == 'POST':
+        order = get_object_or_404(Order, id=order_id)
+        order.delete()
+    return redirect('view-orders')
+
+
+@staff_member_required
+# @login_required
 def view_uploaded_files(request):
     files = FilesUpload.objects.select_related('user').all()
     # for file in files:
     #  print(file.useemail)
     return render(request, 'HUGLI-1-2-3/dashboard/uploaded_files.html', {'files': files})
 
+
+@staff_member_required
+# @login_required
 def files_with_users_view(request):
     files = FilesUpload.objects.all()
     return render(request, 'files_table.html', {'files': files})
 
+
+@staff_member_required
+# @login_required
 def delete_uploaded_file(request, file_id):
     file = get_object_or_404(FilesUpload, id=file_id)
     file.file.delete()
@@ -328,9 +449,54 @@ def delete_uploaded_file(request, file_id):
     return redirect('view-uploaded-files')
 
 
+@staff_member_required
+# @login_required
 def delete_uploaded_file(request, file_id):
     file = get_object_or_404(FilesUpload, id=file_id)
     file.delete()
     return redirect('view-uploaded-files')
 
 
+@staff_member_required
+# @login_required
+def view_billbooks(request):
+    billbook_orders = OrderBillModel.objects.all().order_by('-id')
+    return render(request,
+                'HUGLI-1-2-3/dashboard/view_billbook.html',
+                {'billbook_orders': billbook_orders})
+
+
+@staff_member_required
+# @login_required
+def delete_order_bill_letter(request, order_id):
+    if request.method == 'POST':
+        try:
+            order = OrderBillModel.objects.get(id=order_id)
+            # Optional: Add permission check (e.g., user can only delete their own orders)
+            if order.user == request.user:
+                order.delete()
+        except OrderBillModel.DoesNotExist:
+            pass
+    return redirect('view-bill-letter-orders')
+
+
+
+@staff_member_required
+# @login_required
+def view_letterhead(request):
+    letterhead_orders = OrderLetterModel.objects.all().order_by('-id')
+    return render(request,
+                 'HUGLI-1-2-3/dashboard/view_letterhead.html',  # Ensure correct template name
+                 {'billbook_orders': letterhead_orders})  # Match template variable name
+
+@staff_member_required
+# @login_required
+def delete_order_letter(request, order_id):
+    if request.method == 'POST':
+        try:
+            order = OrderLetterModel.objects.get(id=order_id)  # Use OrderLetterModel
+            if order.user == request.user:
+                order.delete()
+        except OrderLetterModel.DoesNotExist:
+            pass
+    return redirect('view-letter-orders')

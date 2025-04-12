@@ -64,33 +64,45 @@
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2>ENVELOPE - 9×4</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> Utility: For Office Letters</h3>
+          <input type="hidden" value="Utility: For Office Letters" name="envelopes">
           <p>Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <section class="service-category">
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2>ENVELOPE - 10.75×4.75</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> Utility: For Office Letters</h3>
+          <input type="hidden" value="Utility: For Office Letters" name="envelopes">
           <p>Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <section class="service-category">
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2>ENVELOPE - 9.70×4.20</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> Utility: For Office Letters</h3>
+          <input type="hidden" value="Utility: For Office Letters" name="envelopes">
           <p>Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
 
@@ -98,22 +110,30 @@
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2>ENVELOPE - 5×7</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3>Utility: For Invitations / Cards</h3>
+          <input type="hidden" value="Utility: For Invitations / Cards" name="envelopes">
           <p>Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
     </section>
 
     <section class="service-category">
       <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2>ENVELOPE - 6×8</h2>
+      <form method="post"  class="card-form">
         <div class="service-option">
           <h3>Utility: For Invitations / Cards</h3>
+          <input type="hidden" value="Utility: For Invitations / Cards" name="envelopes">
           <p>Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+        {% csrf_token %}
+      </form>
     </section>
 
 
@@ -122,11 +142,15 @@
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2>ENVELOPE - 8.60×10.60</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> Utility: For Brochures / Files</h3>
+           <input type="hidden" value="Utility: For Brochures / Files" name="envelopes">
           <p> Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
 
@@ -134,11 +158,15 @@
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
 
         <h2> ENVELOPE - 9.40×12.40</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> Utility: For Brochures / Files</h3>
+          <input type="hidden" value="Utility: For Brochures / Files" name="envelopes">
           <p> Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <section class="service-category">
@@ -146,10 +174,15 @@
 
         <h2> GIFT ENVELOPE 
         </h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
+          <h3> GIFT ENVELOPE</h3>
+          <input type="hidden" value="GIFT ENVELOPE" name="envelopes">
           <p> Production Time: 4 Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
     
      

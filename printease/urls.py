@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
-from django.conf.urls.static import static
-from django.conf import settings
 from django.contrib.auth import views as auth_views
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
+
+admin_required = [login_required, staff_member_required]
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
@@ -30,7 +32,6 @@ urlpatterns = [
     path('envelopes/', views.envelopes_view, name='envelopes'),
     path('files/', views.files_view, name='files'),
     path('garment-tags/', views.garment_tags_view, name='garment-tags'),
-    path('order/', views.order_view, name='order'),
     path('pamphlets/', views.pamphlets_view, name='pamphlets'),
     path('visiting-cards/', views.visiting_cards_view, name='visiting-cards'),
     path('pens/', views.pens_view, name='pens'),
@@ -39,28 +40,63 @@ urlpatterns = [
     path('shooting-targets/', views.shooting_view, name='shooting-targets'),
     path('bill-books/', views.bill_books_view, name='bill-books'),
     path('checkout/', views.checkout_view, name='checkout'),
-    path('order/<str:card_type>/', views.order_view, name='order'),
+    # path('order/<str:card_type>/', views.order_view, name='order'),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
 
 
+
 ############################DASHBOARD################################################
-    path('admin-dashboard/', views.admin_dashboard, name='admin-dashboard'),
-    path('admin-dashboard/view-users/', views.view_users, name='view-users'),
-    path('admin-dashboard/delete-user/<int:user_id>/', views.delete_user, name='delete-user'),
-    path('admin-dashboard/orders/', views.view_orders, name='view-orders'),
-    path('admin-dashboard/view-uploaded-files/', views.view_uploaded_files, name='view-uploaded-files'),
-    path('files-table/', views.files_with_users_view, name='files_table'),
-    path('admin-dashboard/delete-file/<int:file_id>/', views.delete_uploaded_file, name='delete_uploaded_file'),
+    # Admin Dashboard URLs
+    path('admin-dashboard/',
+         views.admin_dashboard,
+         name='admin-dashboard'),
 
+    # User Management
+    path('admin-dashboard/view-users/',
+         staff_member_required(views.view_users),
+         name='view-users'),
+    path('admin-dashboard/delete-user/<int:user_id>/',
+         staff_member_required(views.delete_user),
+         name='delete-user'),
 
+    # Order Management
+    path('admin-dashboard/orders/',
+         staff_member_required(views.view_orders),
+         name='view-orders'),
+    path('admin-dashboard/delete-order/<int:order_id>/',
+         staff_member_required(views.delete_order),
+         name='delete-order'),
 
+    # File Management
+    path('admin-dashboard/view-uploaded-files/',
+         staff_member_required(views.view_uploaded_files),
+         name='view-uploaded-files'),
+    path('admin-dashboard/delete-file/<int:file_id>/',
+         staff_member_required(views.delete_uploaded_file),
+         name='delete-uploaded-file'),
 
+    # Bill Book Management
+    path('admin-dashboard/bill-order/',
+         staff_member_required(views.view_billbooks),
+         name='view-bill-orders'),
+    path('admin-dashboard/delete-order-bill/<int:order_id>/',
+         staff_member_required(views.delete_order_bill_letter),
+         name='delete-order-bill'),
 
+    # Letterhead Management
+    path('admin-dashboard/letter-order/',
+         staff_member_required(views.view_letterhead),
+         name='view-letter-orders'),
+    path('admin-dashboard/delete-order-letter/<int:order_id>/',
+         staff_member_required(views.delete_order_letter),
+         name='delete-order-letter'),
 
-
-
+    # Files Table View
+    path('admin-dashboard/files-table/',
+         staff_member_required(views.files_with_users_view),
+         name='files-table'),
 ]
 

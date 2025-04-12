@@ -59,74 +59,98 @@
 
     <main class="service-page-content">
       <section class="service-category">
-        <div class="service-img"><img src="{% static 'assets/gloss.png' %}" /></div>
+        <div class="service-img"><img src="{% static 'assets/services/garment-tags/gloss.png' %}" /></div>
         <h2>GLOSS</h2>
+         <form method="post" class="card-form">
         <div class="service-option">
           <h3>High Gloss UV Coating</h3>
+          <input type="hidden" value="High Gloss UV Coating" name="garment-tags">
           <p>Production Time: 7-10 days</p>
 
           <button class="select-button">Order Now</button>
         </div>
+           {% csrf_token %}
+         </form>
       </section>
 
       <section class="service-category">
         <div class="service-img">
-          <img src="{% static 'assets/Screenshot 2025-03-31 at 11.44.08ΓÇ»AM.png' %}" />
+          <img src="{% static 'assets/services/garment-tags/Screenshot 2025-03-31 at 11.44.08ΓÇ»AM.png' %}" />
         </div>
         <h2>MATT</h2>
+        <form method="post" class="card-form">
         <div class="service-option">
           <h3>350 GSM Paper, Matt Lamination</h3>
+          <input type="hidden" value="350 GSM Paper, Matt Lamination" name="garment-tags">
           <p>Production Time: 7-10 days</p>
           <button class="select-button">Order Now</button>
         </div>
+           {% csrf_token %}
+         </form>
       </section>
 
       <section class="service-category">
-        <div class="service-img"><img src="{% static 'assets/mattlamination.png' %}" /></div>
+        <div class="service-img"><img src="{% static 'assets/services/garment-tags/mattlamination.png' %}" /></div>
         <h2>MATT LAMINATION + UV</h2>
+        <form method="post" class="card-form">
         <div class="service-option">
           <h3>400 GSM Paper, Matt Lamination</h3>
+          <input type="hidden" value="400 GSM Paper, Matt Lamination" name="garment-tags">
           <p>Production Time: 7-10 days</p>
           <button class="select-button">Order Now</button>
         </div>
+           {% csrf_token %}
+         </form>
       </section>
 
       <section class="service-category">
-        <div class="service-img"><img src="{% static 'assets/tag1.png' %}" /></div>
+        <div class="service-img"><img src="{% static 'assets/services/garment-tags/tag1.png' %}" /></div>
         <h2>MATT + TEXTURE</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
+          <h3>Matt + Texture</h3>
           <p>Production Time: 7-10 days</p>
-          <select class="form-select mb-3">
-            <option selected>Select an Option</option>
-            <option value="silver">800 GSM + MATT + TEXTURE</option>
-            <option value="gold">800 GSM + MATT</option>
-            <option value="black">800 GSM + MATT + UV</option>
+          <select class="form-select mb-3" name="garment-tags" required >
+            <option selected value="">Select an Option</option>
+            <option value="800 GSM + MATT + TEXTURE">800 GSM + MATT + TEXTURE</option>
+            <option value="800 GSM + MATT">800 GSM + MATT</option>
+            <option value="800 GSM + MATT + UV">800 GSM + MATT + UV</option>
           </select>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <section class="service-category">
-        <div class="service-img"><img src="{% static 'assets/pvctags.png' %}" /></div>
+        <div class="service-img"><img src="{% static 'assets/services/garment-tags/pvctags.png' %}" /></div>
         <h2>PVC TAG</h2>
-
+        <form method="post"  class="card-form">
         <div class="service-option">
+           <h3>PVC TAG</h3>
+          <input type="hidden" value="PVC TAG" name="garment-tags">
           <p>Production Time: 2 days</p>
-
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <section class="service-category">
         <div class="service-img">
-          <img src="{% static 'assets/Screenshot 2025-03-31 at 11.48.45ΓÇ»AM.png' %}" />
+          <img src="{% static 'assets/services/garment-tags/Screenshot 2025-03-31 at 11.48.45ΓÇ»AM.png' %}" />
         </div>
         <h2>THREAD</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
+          <h3>Thread</h3>
+          <input type="hidden" value="Thread" name="garment-tags">
           <p>Production Time: 2 days</p>
 
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
     </main>
 

@@ -52,3 +52,4 @@ class CustomLoginForm(forms.Form):
 
     def get_user(self):
         return getattr(self, 'user', None)
+

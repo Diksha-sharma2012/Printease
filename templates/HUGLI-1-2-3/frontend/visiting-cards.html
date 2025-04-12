@@ -126,17 +126,18 @@
             <h2>
                 <i class="fas fa-id-card"></i> METAL VISITING CARDS
                 <span class="price-badge">Premium</span>
+
             </h2>
-            <div class="quantity-info">Standard Quantity: 50 cards</div>
+            <div class="quantity-info" >Standard Quantity: 50 cards</div>
         </div>
         <div class="card-body">
-            <form method="post"  class="card-form">
-
+            <form method="post" class="card-form">
+                <input type="hidden" name="product_name" value="METAL VISITING CARDS">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="service-img">
                             <img
-                                    src="{% static 'assets/metallic_visiting_card.jpg' %}"
+                                    src="{% static 'assets/services/visiting-cards/metallic_visiting_card.jpg' %}"
                                     alt="Metal Visiting Cards"
                                     class="img-fluid"
                             />
@@ -150,8 +151,8 @@
                                 <li>Scratch-resistant surface</li>
                                 <li>Unique luxury feel</li>
                             </ul>
-                            <select class="form-select mb-3" id="cardType" name="visiting_cards">
-                                <option selected disabled>Select Metal Type</option>
+                            <select class="form-select mb-3" id="cardType" name="product_type" required>
+                                <option selected value="">Select Metal Type</option>
                                 <option value="Silver Metal">Silver Metal</option>
                                 <option value="Gold Metal">Gold Metal</option>
                                 <option value="Black Metal">Black Metal</option>
@@ -179,40 +180,40 @@
             <div class="quantity-info">Standard Quantity: 500 cards</div>
         </div>
         <div class="card-body">
-            <form method="post"  class="card-form">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-img">
-                        <img
-                                src="{% static 'assets/800gsm.jpg' %}"
-                                alt="800 GSM Cards"
-                                class="img-fluid"
-                        />
+            <form method="post" class="card-form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="service-img">
+                            <img
+                                    src="{% static 'assets/services/visiting-cards/800gsm.jpg' %}"
+                                    alt="800 GSM Cards"
+                                    class="img-fluid"
+                            />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="service-option">
-                        <h3>Premium thick cards with various finishing options</h3>
-                        <ul class="card-features">
-                            <li>Available in multiple textures and finishes</li>
-                            <li>Die Cut options available</li>
-                            <li>Lamination: Matt | Gloss | Soft Touch</li>
-                        </ul>
-                        <select class="form-select mb-3"  name="visiting_cards" >
-                            <option selected disabled>Select Card Type</option>
-                            <option value="velvet">800 GSM VELVET</option>
-                            <option value="matt">800 GSM MATT</option>
-                            <option value="black">800 GSM BLACK SHEET</option>
-                            <option value="craft">800 GSM CRAFT PAPER</option>
-                            <option value="texture">800 GSM TEXTURE</option>
-                        </select>
-                       <button type="submit" class="select-button btn-primary">
+                    <div class="col-md-8">
+                        <div class="service-option">
+                            <h3>Premium thick cards with various finishing options</h3>
+                            <ul class="card-features">
+                                <li>Available in multiple textures and finishes</li>
+                                <li>Die Cut options available</li>
+                                <li>Lamination: Matt | Gloss | Soft Touch</li>
+                            </ul>
+                            <select class="form-select mb-3" name="visiting_cards" required>
+                                <option selected disabled value="">Select Card Type</option>
+                                <option value="800 GSM VELVET">800 GSM VELVET</option>
+                                <option value="800 GSM MATT">800 GSM MATT</option>
+                                <option value="800 GSM BLACK SHEET">800 GSM BLACK SHEET</option>
+                                <option value="800 GSM CRAFT PAPER">800 GSM CRAFT PAPER</option>
+                                <option value="800 GSM TEXTURE">800 GSM TEXTURE</option>
+                            </select>
+                            <button type="submit" class="select-button btn-primary">
                                 ORDER 800 GSM CARDS
                             </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-                 {%csrf_token%}
+                {%csrf_token%}
             </form>
         </div>
     </section>
@@ -227,41 +228,38 @@
             <div class="quantity-info">Standard Quantity: 500 cards</div>
         </div>
         <div class="card-body">
-            <form method="post"  class="card-form">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-img">
-                        <img
-                                src="{% static 'assets/500gsm.jpg' %}"
-                                alt="500 GSM Cards"
-                                class="img-fluid"
-                        />
+            <form method="post" class="card-form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="service-img">
+                            <img
+                                    src="{% static 'assets/services/visiting-cards/500gsm.jpg' %}"
+                                    alt="500 GSM Cards"
+                                    class="img-fluid"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="service-option">
+                            <h3>High-quality standard thickness cards</h3>
+                            <ul class="card-features">
+                                <li>Various finishing options available</li>
+                                <li>Die Cut options available</li>
+                                <li>Lamination: Matt | Gloss | Soft Touch</li>
+                            </ul>
+                            <select class="form-select mb-3" name="visiting_cards" required>
+                                <option selected disabled value="">Select Card Type</option>
+                                <option value="500 GSM VELVET" >500 GSM VELVET</option>
+                                <option value="500 GSM MATT">500 GSM MATT</option>
+                                <option value="400 GSM DRIP-OFF">400 GSM DRIP-OFF</option>
+                            </select>
+                            <button class="select-button btn-primary">
+                                ORDER 500 GSM CARDS
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="service-option">
-                        <h3>High-quality standard thickness cards</h3>
-                        <ul class="card-features">
-                            <li>Various finishing options available</li>
-                            <li>Die Cut options available</li>
-                            <li>Lamination: Matt | Gloss | Soft Touch</li>
-                        </ul>
-                        <select class="form-select mb-3" name="visiting_cards">
-                            <option selected disabled>Select Card Type</option>
-                            <option value="velvet">500 GSM VELVET</option>
-                            <option value="matt">500 GSM MATT</option>
-                            <option value="drip">400 GSM DRIP-OFF</option>
-                        </select>
-                        <button
-                                class="select-button btn-primary"
-                                onclick="window.location.href='{% url 'checkout' %}'"
-                        >
-                            ORDER 500 GSM CARDS
-                        </button>
-                    </div>
-                </div>
-            </div>
-                 {% csrf_token %}
+                {% csrf_token %}
             </form>
         </div>
     </section>
@@ -278,43 +276,39 @@
             </div>
         </div>
         <div class="card-body">
-            <form method="post"  class="card-form">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-img">
-                        <img
-                                src="{% static 'assets/pvcvisitingcard.jpg' %}"
-                                alt="PVC Visiting Cards"
-                                class="img-fluid"
-                        />
+            <form method="post" class="card-form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="service-img">
+                            <img
+                                    src="{% static 'assets/services/visiting-cards/pvcvisitingcard.jpg' %}"
+                                    alt="PVC Visiting Cards"
+                                    class="img-fluid"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="service-option">
+                            <h3>Plastic cards for exceptional durability</h3>
+                            <ul class="card-features">
+                                <li>Waterproof and tear-resistant</li>
+                                <li>Die Cut options available</li>
+                                <li>Perfect for frequent use</li>
+                            </ul>
+                            <select class="form-select mb-3" name="visiting_cards" required>
+                                <option selected disabled value="">Select Material Type</option>
+                                <option value="800 MICRON FUSING">800 MICRON FUSING</option>
+                                <option value=" 250 MICRON TRANSPARENT SHEET">250 MICRON TRANSPARENT SHEET</option>
+                                <option value="180 MICRON">180 MICRON</option>
+                            </select>
+                            <button
+                                    class="select-button btn-primary">
+                                ORDER PVC CARDS
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="service-option">
-                        <h3>Plastic cards for exceptional durability</h3>
-                        <ul class="card-features">
-                            <li>Waterproof and tear-resistant</li>
-                            <li>Die Cut options available</li>
-                            <li>Perfect for frequent use</li>
-                        </ul>
-                        <select class="form-select mb-3" name="visiting_cards">
-                            <option selected disabled>Select Material Type</option>
-                            <option value="800micron">800 MICRON FUSING</option>
-                            <option value="250micron">
-                                250 MICRON TRANSPARENT SHEET
-                            </option>
-                            <option value="180micron">180 MICRON</option>
-                        </select>
-                        <button
-                                class="select-button btn-primary"
-                                onclick="window.location.href='{% url 'checkout' %}'"
-                        >
-                            ORDER PVC CARDS
-                        </button>
-                    </div>
-                </div>
-            </div>
-                 {% csrf_token %}
+                {% csrf_token %}
             </form>
         </div>
     </section>
@@ -329,45 +323,42 @@
             <div class="quantity-info">Standard Quantity: 1000 cards</div>
         </div>
         <div class="card-body">
-            <form method="post"  class="card-form">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-img">
-                        <img
-                                src="{% static 'assets/regularcard.jpg' %}"
-                                alt="Regular Visiting Cards"
-                                class="img-fluid"
-                        />
+            <form method="post" class="card-form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="service-img">
+                            <img
+                                    src="{% static 'assets/services/visiting-cards/regularcard.jpg' %}"
+                                    alt="Regular Visiting Cards"
+                                    class="img-fluid"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="service-option">
+                            <h3>Cost-effective standard business cards</h3>
+                            <ul class="card-features">
+                                <li>Premium thick quality</li>
+                                <li>Multiple finishing options</li>
+                                <li>Great for bulk orders</li>
+                            </ul>
+                            <select class="form-select mb-3" name="visiting_cards" required>
+                                <option selected value="">Select Finish Type</option>
+                                <option value="MATT LAMINATION">MATT LAMINATION</option>
+                                <option value="MATT LAMINATION TEXTURE">MATT LAMINATION TEXTURE</option>
+                                <option value="GLOSS COATED TEXTURE">GLOSS COATED TEXTURE</option>
+                                <option value="GLOSS LAMINATION">GLOSS LAMINATION</option>
+                                <option value="GLOSS COATED">GLOSS COATED</option>
+                                <option value="GLOSS COATED SMALL">GLOSS COATED SMALL</option>
+                                <option value="WITHOUT LAMINATION">WITHOUT LAMINATION</option>
+                                <option value="WITHOUT LAMINATION SMALL">WITHOUT LAMINATION SMALL</option>
+                            </select>
+                            <button class="select-button btn-primary">
+                                ORDER REGULAR CARDS
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="service-option">
-                        <h3>Cost-effective standard business cards</h3>
-                        <ul class="card-features">
-                            <li>Premium thick quality</li>
-                            <li>Multiple finishing options</li>
-                            <li>Great for bulk orders</li>
-                        </ul>
-                        <select class="form-select mb-3" name="visiting_cards">
-                            <option selected disabled>Select Finish Type</option>
-                            <option value="matt">MATT LAMINATION</option>
-                            <option value="matt-texture">MATT LAMINATION TEXTURE</option>
-                            <option value="gloss-texture">GLOSS COATED TEXTURE</option>
-                            <option value="gloss">GLOSS LAMINATION</option>
-                            <option value="gloss-coated">GLOSS COATED</option>
-                            <option value="gloss-small">GLOSS COATED SMALL</option>
-                            <option value="no-lam">WITHOUT LAMINATION</option>
-                            <option value="no-lam-small">WITHOUT LAMINATION SMALL</option>
-                        </select>
-                        <button
-                                class="select-button btn-primary"
-                                onclick="window.location.href='{% url 'checkout' %}'"
-                        >
-                            ORDER REGULAR CARDS
-                        </button>
-                    </div>
-                </div>
-            </div>
                 {% csrf_token %}
             </form>
         </div>

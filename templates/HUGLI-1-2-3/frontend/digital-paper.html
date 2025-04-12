@@ -60,7 +60,7 @@
     <main class="service-page-content">
       <section class="service-category">
         <div class="service-img">
-          <img src="{% static 'assets/digital-printing-paper.jpg' %}" />
+          <img src="{% static 'assets/services/digital-paper/digital-printing-paper.jpg' %}" />
         </div>
 
         <h2>DIGITAL -PAPER PRINTING</h2>
@@ -68,18 +68,18 @@
         <div class="service-option">
           <h3>Production Time: 1 Working Days</h3>
 <form method="post"  class="card-form">
-          <select class="form-select mb-3" name="digital-paper">
-            <option selected>Select an Option</option>
-            <option value="silver">LETTER HEAD PAPER</option>
-            <option value="gold">ART PAPER</option>
-            <option value="black">TEXTURE PAPER</option>
-            <option value="black">METALLIC PAPER</option>
-            <option value="black">NT / PVC SHEETS</option>
-            <option value="black">PAPER GUMMING</option>
-            <option value="black">PVC GUMMING</option>
-            <option value="black">ONLY PRINTING</option>
+          <select class="form-select mb-3" name="digital-paper" required>
+            <option selected disabled value="">Select an Option</option>
+            <option value="LETTER HEAD PAPER">LETTER HEAD PAPER</option>
+            <option value="ART PAPER">ART PAPER</option>
+            <option value="TEXTURE PAPER">TEXTURE PAPER</option>
+            <option value="METALLIC PAPER">METALLIC PAPER</option>
+            <option value="NT / PVC SHEETS">NT / PVC SHEETS</option>
+            <option value="PAPER GUMMING">PAPER GUMMING</option>
+            <option value="PVC GUMMING">PVC GUMMING</option>
+            <option value="ONLY PRINTING">ONLY PRINTING</option>
           </select>
-          <button class="select-button">Order Now</button>
+          <button class="select-button btn-primary">Order Now</button>
   {% csrf_token%}
 </form>
         </div>

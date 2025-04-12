@@ -63,22 +63,30 @@
       <section class="service-category">
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
         <h2>PVC FILE - SMALL SIZE</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> 300 Micron PP Sheet, 9” × 12”</h3>
+          <input type="hidden" value="300 Micron PP Sheet, 9” × 12”" name="files">
           <p>Production Time: 3 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
 
       <section class="service-category">
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
         <h2>PVC FILE - BIG SIZE</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> 300 Micron PP Sheet, 9.5” × 12.5”</h3>
+           <input type="hidden" value="300 Micron PP Sheet, 9.5” × 12.5”" name="files">
           <p>Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
     </section>
 
 
@@ -86,22 +94,30 @@
       <section class="service-category">
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
         <h2>SBS FILE - SMALL SIZE</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> 260 GSM SBS Paper, 9” × 12”</h3>
+          <input type="hidden" value="260 GSM SBS Paper, 9” × 12”" name="files">
           <p> Production Time: 3 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
 
       <section class="service-category">
         <div class="service-img"><img src="{% static 'assets/demo.png' %}"></div>
         <h2>SBS FILE - BIG SIZE</h2>
+        <form method="post"  class="card-form">
         <div class="service-option">
           <h3> 320 GSM SBS Paper, 9.5” × 12.5”</h3>
+          <input type="hidden" value="320 GSM SBS Paper, 9.5” × 12.5”" name="files">
           <p> Production Time: 4 Working Days</p>
           <button class="select-button">Order Now</button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
     
      

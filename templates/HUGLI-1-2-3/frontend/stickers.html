@@ -62,17 +62,20 @@
       <!-- Paper Stickers Section -->
       <section class="service-category">
         <div class="service-img">
-          <img src="{% static 'assets/paper-stickers.jpg' %}" alt="Paper Stickers Example" />
+          <img src="{% static 'assets/paper-stickers.jpg' %}" alt="Paper Stickers Example" /> <<! image not available >>
         </div>
         <h2>PAPER STICKERS</h2>
+        <form method="post" class="card-form">
         <div class="service-option">
           <h3>Standard adhesive paper stickers</h3>
+          <input type="hidden" value="Standard adhesive paper stickers" name="card">
           <p>Production Time: 3-5 working days</p>
 
           <div class="quantity-selector">
             <label for="paper-qty">Quantity (min 100):</label>
             <input
               type="number"
+               name="quantity"
               id="paper-qty"
               class="form-control mb-3"
               min="100"
@@ -84,27 +87,31 @@
 
           <button
             class="select-button"
-            onclick="addToCart('Paper Stickers', document.getElementById('paper-qty').value)"
           >
             Order Now
           </button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <!-- PVC Stickers Section -->
       <section class="service-category">
         <div class="service-img">
-          <img src="{% static 'assets/pvc-stickers.jpg' %}" alt="PVC Stickers Example" />
+          <img src="{% static 'assets/pvc-stickers.jpg' %}" alt="PVC Stickers Example" />     <<! image not available >>
         </div>
         <h2>PVC STICKERS</h2>
+        <form method="post" class="card-form">
         <div class="service-option">
           <h3>Durable waterproof PVC stickers</h3>
+          <input type="hidden" value="Durable waterproof PVC stickers" name="card">
           <p>Production Time: 5-7 working days</p>
 
           <div class="quantity-selector">
             <label for="pvc-qty">Quantity (min 100):</label>
             <input
               type="number"
+              name="quantity"
               id="pvc-qty"
               class="form-control mb-3"
               min="100"
@@ -116,21 +123,24 @@
 
           <button
             class="select-button"
-            onclick="addToCart('PVC Stickers', document.getElementById('pvc-qty').value)"
           >
             Order Now
           </button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
 
       <!-- Custom Labels Section -->
       <section class="service-category">
         <div class="service-img">
-          <img src="{% static 'assets/custom-labels.jpg' %}" alt="Custom Labels Example" />
+          <img src="{% static 'assets/custom-labels.jpg' %}" alt="Custom Labels Example" />   <<! image not available >>
         </div>
         <h2>CUSTOM LABELS</h2>
+        <form method="post" class="card-form">
         <div class="service-option">
           <h3>Tailored to your specifications</h3>
+          <input type="hidden" value="Tailored to your specifications" name="card">
           <p>Production Time: 4-6 working days</p>
 
           <div class="form-group mb-3">
@@ -146,6 +156,7 @@
             <label for="label-qty">Quantity (min 100):</label>
             <input
               type="number"
+               name="quantity"
               id="label-qty"
               class="form-control mb-3"
               min="100"
@@ -155,10 +166,12 @@
             />
           </div>
 
-          <button class="select-button" onclick="addCustomLabelToCart()">
+          <button class="select-button">
             Order Now
           </button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
     </main>
 

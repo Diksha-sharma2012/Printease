@@ -40,7 +40,10 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: stretch; /* Ensures equal height for all cards */
             gap: 30px;
+            margin: 0 auto;
+            max-width: 1200px;
         }
 
         .dashboard-card {
@@ -50,6 +53,10 @@
             border-radius: 15px;
             padding: 30px;
             width: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -66,6 +73,8 @@
 
         .dashboard-card h4 {
             font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
 
         .dashboard-card a {
@@ -141,8 +150,8 @@
 
 <!-- Dashboard Section -->
 <div class="dashboard-container">
-    <h1>Welcome, Admin!</h1>
-    <p class="lead">Manage PrintEase operations from your personalized control panel.</p>
+    <h1>Admin Dashboard</h1>
+    <p class="lead">Manage your services and orders effectively.</p>
 
     <div class="card-container">
         <div class="dashboard-card">
@@ -157,19 +166,30 @@
             <p>Track and manage placed orders.</p>
             <a href="{% url 'view-orders' %}">View Orders</a>
         </div>
-          <div class="dashboard-card">
-        <i class="fas fa-file-alt"></i>
-        <h4>Uploaded Files</h4>
-        <p>Access and manage all uploaded documents.</p>
-        <a href="{% url 'view-uploaded-files' %}">View Files</a>
-    </div>
+        <div class="dashboard-card">
+            <i class="fas fa-file-alt"></i>
+            <h4>ATM Pouches</h4>
+            <p>Access and manage all orders for uploaded documents.</p>
+            <a href="{% url 'view-uploaded-files' %}">View Orders</a>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-print"></i>
+            <h4>Bill Book</h4>
+            <p>Manage printing orders for bill books.</p>
+            <a href="{% url 'view-bill-orders' %}">View Orders</a>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-print"></i>
+            <h4>Letter Head</h4>
+            <p>Manage printing orders for Letter Head.</p>
+            <a href="{% url 'view-letter-orders' %}">View Orders</a>
+        </div>
         <div class="dashboard-card">
             <i class="fas fa-sign-out-alt"></i>
             <h4>Logout</h4>
             <p>Securely sign out from your account.</p>
             <a href="{% url 'logout' %}">Logout</a>
         </div>
-
     </div>
 </div>
 

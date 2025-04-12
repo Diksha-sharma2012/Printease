@@ -91,8 +91,11 @@
       <p>High-quality targets meeting ISSF standards</p>
     </section>
 
+
     <main class="service-page-content">
       <section class="service-category">
+
+        <form method="post" class="card-form">
         <div class="target-options">
           <div
             class="target-option selected"
@@ -101,6 +104,7 @@
           >
             <img src="{% static 'assets/pistol-target.jpg' %}" alt="Pistol Target" />
             <h3>PISTOL TARGETS</h3>
+            <input type="hidden" value="Standard adhesive paper stickers" name="target">
             <p>Standard ISSF pistol shooting targets</p>
             <p><strong>Size:</strong> 50cm × 50cm</p>
             <p><strong>Production Time:</strong> 3-5 working days</p>
@@ -114,6 +118,7 @@
             <img src="{% static 'assets/rifle-target.jpg' %}" alt="Rifle Target" />
             <h3>RIFLE TARGETS</h3>
             <p>Standard ISSF rifle shooting targets</p>
+            <input type="hidden" value="Standard ISSF rifle shooting targets" name="target">
             <p><strong>Size:</strong> 70cm × 70cm</p>
             <p><strong>Production Time:</strong> 3-5 working days</p>
           </div>
@@ -124,6 +129,7 @@
             <label for="target-qty">Quantity (min 50):</label>
             <input
               type="number"
+              name="quantity"
               id="target-qty"
               class="form-control"
               min="50"
@@ -133,10 +139,12 @@
             />
           </div>
 
-          <button class="select-button" onclick="submitTargetOrder()">
+          <button class="select-button">
             Order Now
           </button>
         </div>
+          {% csrf_token %}
+        </form>
       </section>
     </main>
 

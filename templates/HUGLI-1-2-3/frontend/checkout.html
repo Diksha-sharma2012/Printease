@@ -113,9 +113,10 @@
             <h3 class="text-center mb-4">Selected Items</h3>
             <div class="selected-items">
                 <div class="item">
-                    <span class="item-name">{%if cards%}{{cards}}{%endif%}</span>
-                    <input type="hidden" name="product" value="{{cards}}">
-                    <input type="number" class="form-control quantity" placeholder="Qty" min="1"/>
+                    <span class="item-name">{%if product_type%}{{product_type}}{%endif%}</span>
+                    <input type="hidden" name="product_type" value="{{product_type}}">
+                    <input type="hidden" name="product_name" value="{{product_name}}">
+                    <input type="number" class="form-control quantity" value="{%if quantity%}{{quantity}}{%else %}1{%endif%}" min="1"/>
                 </div>
             </div>
         </div>
