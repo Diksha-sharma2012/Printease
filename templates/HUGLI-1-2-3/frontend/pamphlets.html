@@ -139,11 +139,12 @@
 
     <main class="service-page-content">
       <!-- Pamphlets Section -->
-      <section class="product-category">
+      <section class="product-category" >
         <div class="product-header">
           <h2><i class="fas fa-file-alt"></i> PAMPHLETS</h2>
         </div>
         <div class="product-body">
+          <form method="post"  class="card-form">
           <div class="row">
             <div class="col-md-4">
               <div class="service-img">
@@ -159,7 +160,7 @@
                 <h3>Choose your paper quality:</h3>
 
                 <div class="paper-options">
-                  <label class="paper-option">
+                  <label class="paper-option" name="pamphlet_paper">
                     <input
                       type="radio"
                       name="pamphlet-paper"
@@ -198,15 +199,21 @@
                   />
                 </div>
 
+<!--                <button-->
+<!--                  class="select-button btn-primary"-->
+<!--                  onclick="addPamphletsToCart()"-->
+<!--                >-->
                 <button
                   class="select-button btn-primary"
-                  onclick="addPamphletsToCart()"
+                  type="submit"
                 >
                   ORDER PAMPHLETS
                 </button>
               </div>
             </div>
           </div>
+            {%csrf_token%}
+          </form>
         </div>
       </section>
 

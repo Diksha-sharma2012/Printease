@@ -67,8 +67,8 @@
 
         <div class="service-option">
           <h3>Production Time: 1 Working Days</h3>
-
-          <select class="form-select mb-3">
+<form method="post"  class="card-form">
+          <select class="form-select mb-3" name="digital-paper">
             <option selected>Select an Option</option>
             <option value="silver">LETTER HEAD PAPER</option>
             <option value="gold">ART PAPER</option>
@@ -80,6 +80,8 @@
             <option value="black">ONLY PRINTING</option>
           </select>
           <button class="select-button">Order Now</button>
+  {% csrf_token%}
+</form>
         </div>
       </section>
     </main>

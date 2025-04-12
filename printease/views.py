@@ -181,6 +181,10 @@ def atm_pouches_view(request):
     return render(request, 'HUGLI-1-2-3/frontend/atm-pouches.html')
 
 def digital_paper_view(request):
+    if request.method == "POST":
+        cards = request.POST.get("digital-paper")
+        print(cards)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': cards})
     return render(request, 'HUGLI-1-2-3/frontend/digital-paper.html')
 
 def envelopes_view(request):
@@ -196,6 +200,10 @@ def order_view(request):
     return render(request, 'HUGLI-1-2-3/frontend/order.html')
 
 def pamphlets_view(request):
+    if request.method == "POST":
+        cards = request.POST.get("pamphlets_paper")
+        print(cards)
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html',{'cards':cards})
     return render(request, 'HUGLI-1-2-3/frontend/pamphlets.html')
 
 def visiting_cards_view(request,):
@@ -231,6 +239,7 @@ def checkout_view(request):
         pincode = request.POST.get('pincode')
         notes = request.POST.get('notes')
         product_name = request.POST.get('product', '')
+        quality=request.POST.get('quality')
         quantity = request.POST.get('quantity', 1)
 
         user = request.user
@@ -244,6 +253,7 @@ def checkout_view(request):
         print(pincode)
         print(notes)
         print(product_name)
+        print(quality)
         print(quantity)
         # Save order
         order = Order(
@@ -254,6 +264,7 @@ def checkout_view(request):
             pincode=pincode,
             notes=notes,
             product_name=product_name,
+            quality=quality,
             quantity=quantity,
             user = user_model
         )
