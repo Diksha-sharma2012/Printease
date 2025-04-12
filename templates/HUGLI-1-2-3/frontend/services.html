@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Printing Services | PrintEase</title>
+    <link rel="stylesheet" href="{% static 'STYLES/STYLES.CSS' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Enhanced Services Page Styles */
+      .services-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("/static/assets/services-hero.jpg");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+      }
+
+      .services-hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+      }
+
+      .services-hero p {
+        font-size: 1.3rem;
+        max-width: 800px;
+        margin: 0 auto 30px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .service-image {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .service-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .service-card:hover .service-image img {
+        transform: scale(1.1);
+      }
+
+      .service-content {
+        padding: 25px;
+      }
+
+      .service-content h3 {
+        color: #0056b3;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .service-content p {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .service-cta {
+        display: inline-block;
+        background: #0056b3;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .service-card:hover .service-cta {
+        background: #003d7a;
+      }
+
+      .service-icon {
+        font-size: 2.5rem;
+        color: #0056b3;
+        margin-bottom: 15px;
+      }
+
+      .service-features {
+        margin: 15px 0;
+        padding-left: 20px;
+      }
+
+      .service-features li {
+        margin-bottom: 8px;
+        position: relative;
+      }
+
+      .service-features li:before {
+        content: "•";
+        color: #0056b3;
+        font-weight: bold;
+        position: absolute;
+        left: -15px;
+      }
+
+      @media (max-width: 768px) {
+        .services-hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .services-hero p {
+          font-size: 1.1rem;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="{% static 'assets/logo.png' %}" alt="PrintEase Logo" />
+      </div>
+         <ul class="nav-links">
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'services' %}">SERVICES</a></li>
+        <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            <li><a href="{% url 'signup' %}">SIGN UP</a></li>
+        {% endif %}
+      </ul>
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="services-hero">
+      <h1>Our Comprehensive Printing Services</h1>
+      <p>
+        Discover our wide range of high-quality printing solutions tailored to
+        meet your business needs
+      </p>
+    </section>
+
+    <!-- Services Grid -->
+    <div class="services-grid">
+      <!-- Visiting Cards -->
+      <a href="{% url 'visiting-cards' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/visiting-cards.jpg' %}" alt="Visiting Cards" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-id-card"></i>
+          </div>
+          <h3>Visiting Cards</h3>
+          <p>
+            Make a lasting impression with our premium business cards in various
+            finishes and styles.
+          </p>
+          <ul class="service-features">
+            <li>Die-cut options available</li>
+            <li>Premium materials including metal and velvet</li>
+            <li>Custom shapes and sizes</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Pamphlets & Posters -->
+      <a href="{% url 'pamphlets' %}" class="service-card">
+        <div class="service-image">
+          <img
+            src="{% static 'assets/services/pamphlets.jpg' %}"
+            alt="Pamphlets and Posters"
+          />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-file-lines"></i>
+          </div>
+          <h3>Pamphlets & Posters</h3>
+          <p>
+            High-impact marketing materials to promote your business
+            effectively.
+          </p>
+          <ul class="service-features">
+            <li>Multiple paper quality options</li>
+            <li>Vibrant color printing</li>
+            <li>Various size options available</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Garment Tags -->
+      <a href="{% url 'garment-tags' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/garment-tags.jpg' %}" alt="Garment Tags" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-tag"></i>
+          </div>
+          <h3>Garment Tags</h3>
+          <p>
+            Professional tags for your clothing line that reflect your brand
+            quality.
+          </p>
+          <ul class="service-features">
+            <li>Minimum order quantity: 2000</li>
+            <li>Various material options</li>
+            <li>Custom shapes and sizes</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Files -->
+      <a href="{% url 'files' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/files.jpg' %}" alt="Files" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-folder"></i>
+          </div>
+          <h3>Files</h3>
+          <p>Professional files for offices, hospitals, and businesses.</p>
+          <ul class="service-features">
+            <li>Durable materials</li>
+            <li>Custom printing options</li>
+            <li>Various size options</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Letter Heads -->
+      <a href="{% url 'letter-heads' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/letterheads.jpg' %}" alt="Letter Heads" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-file-signature"></i>
+          </div>
+          <h3>Letter Heads</h3>
+          <p>
+            Professional stationery that represents your brand with elegance.
+          </p>
+          <ul class="service-features">
+            <li>Premium quality paper</li>
+            <li>Custom designs</li>
+            <li>Quick turnaround</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Envelopes -->
+      <a href="{% url 'envelopes' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/envelopes.jpg' %}" alt="Envelopes" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Envelopes</h3>
+          <p>Professional envelopes to complement your stationery.</p>
+          <ul class="service-features">
+            <li>Various size options</li>
+            <li>Custom printing</li>
+            <li>Premium paper quality</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Digital Paper Printing -->
+      <a href="{% url 'digital-paper' %}" class="service-card">
+        <div class="service-image">
+          <img
+            src="{% static 'assets/services/digital-printing.jpg' %}"
+            alt="Digital Paper Printing"
+          />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-print"></i>
+          </div>
+          <h3>Digital Paper Printing</h3>
+          <p>High-quality digital printing for all your paper needs.</p>
+          <ul class="service-features">
+            <li>Xerox 3100 Digital Press</li>
+            <li>Quick turnaround</li>
+            <li>Various paper options</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- ATM Pouches -->
+      <a href="{% url 'atm-pouches' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/atm-pouches.jpg' %}" alt="ATM Pouches" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <h3>ATM Pouches</h3>
+          <p>Innovative alternative to traditional business cards.</p>
+          <ul class="service-features">
+            <li>Minimum order: 1000</li>
+            <li>Durable materials</li>
+            <li>Custom printing</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Bill Books -->
+      <a href="{% url 'bill-books' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/bill-books.jpg' %}" alt="Bill Books" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-receipt"></i>
+          </div>
+          <h3>Bill Books</h3>
+          <p>Professional invoice books for your business needs.</p>
+          <ul class="service-features">
+            <li>Carbonless options</li>
+            <li>Custom designs</li>
+            <li>Various size options</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Stickers & Labels -->
+      <a href="{% url 'stickers-labels' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/stickers.jpg' %}" alt="Stickers & Labels" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-sticky-note"></i>
+          </div>
+          <h3>Stickers & Labels</h3>
+          <p>High-quality stickers for product labeling and promotions.</p>
+          <ul class="service-features">
+            <li>Various material options</li>
+            <li>Half-cut options available</li>
+            <li>Protective lamination</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Pens -->
+      <a href="{% url 'pens' %}" class="service-card">
+        <div class="service-image">
+          <img src="{% static 'assets/services/pens.jpg' %}" alt="Printed Pens" />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-pen"></i>
+          </div>
+          <h3>Printed Pens</h3>
+          <p>Branded pens for effective marketing and promotions.</p>
+          <ul class="service-features">
+            <li>Starting from ₹50 per piece</li>
+            <li>Laser and screen printing options</li>
+            <li>Various pen styles available</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+
+      <!-- Shooting Targets -->
+      <a href="{% url 'shooting-targets' %}" class="service-card">
+        <div class="service-image">
+          <img
+            src="{% static 'assets/services/shooting-targets.jpg' %}"
+            alt="Shooting Targets"
+          />
+        </div>
+        <div class="service-content">
+          <div class="service-icon">
+            <i class="fas fa-crosshairs"></i>
+          </div>
+          <h3>Shooting Targets</h3>
+          <p>Precision-printed targets for professional use.</p>
+          <ul class="service-features">
+            <li>ISSF standard compliant</li>
+            <li>Premium grade paper</li>
+            <li>Custom designs available</li>
+          </ul>
+          <span class="service-cta">View Options</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-contact">
+          <h2>Contact Us</h2>
+          <form action="#" method="post" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+            ></textarea>
+            <button type="submit" class="contact-button">Send Message</button>
+          </form>
+        </div>
+        <div class="footer-info">
+          <div class="footer-logo">
+            <img
+              src="{% static 'assets/logo.png' %}"
+              alt="PrintEase Logo"
+              style="max-width: 180px"
+            />
+          </div>
+          <div class="contact-details">
+            <p>
+              <i class="fas fa-phone-alt"></i> +91-8968590010, +91-7837315102
+            </p>
+            <p><i class="fas fa-envelope"></i> bhavnishgarg94@gmail.com</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i>
+              <a
+                href="https://maps.app.goo.gl/vJB3XF7eMNWB2pxS7"
+                target="_blank"
+              >
+                Hugli Printing Press, Handiaya Bazaar Rd, Barnala, Punjab 148101
+              </a>
+            </p>
+          </div>
+          <div class="social-links" style="margin-top: 20px">
+            <a href="#" class="social-icon"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 PrintEase. All Rights Reserved. | Phantom Solutions</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

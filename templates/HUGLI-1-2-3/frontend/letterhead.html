@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letterhead Order Form</title>
+    <link rel="stylesheet" href="{% static 'STYLES/STYLES.CSS' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #logoPreview {
+            max-width: 150px;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        #previewSection {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            display: none;
+            text-align: left;
+        }
+        .preview-item { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+          <img src="{% static 'assets/logo.png' %}" alt="Logo" />
+        </div>
+        <ul class="nav-links">
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'services' %}">SERVICES</a></li>
+        <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            <li><a href="{% url 'signup' %}">SIGN UP</a></li>
+        {% endif %}
+      </ul>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+  
+      <!-- Hero Section -->
+      <section class="page-hero service-hero">
+        <h1>BILL BOOKS</h1>
+        <p>Making a Lasting Impression  From the First WordS</p>
+      </section>
+
+<div class="container">
+    <h2>Order Your Letterhead</h2>
+
+    <!-- Upload Logo -->
+    <div class="form-group">
+        <label>Upload Logo:</label>
+        <input type="file" id="logoUpload" accept="image/*">
+        <img id="logoPreview" src="#" alt="Logo Preview" style="display: none;">
+    </div>
+
+    <!-- Enter Company Details -->
+    <div class="form-group">
+        <label>Company Name:</label>
+        <input type="text" id="companyName" placeholder="Enter Company Name">
+    </div>
+
+    <div class="form-group">
+        <label>Address:</label>
+        <input type="text" id="address" placeholder="Enter Address">
+    </div>
+
+    <!-- Select Paper Type & Size -->
+    <div class="form-group">
+        <label>Paper Type:</label>
+        <select id="paperType">
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Paper Size:</label>
+        <select id="paperSize">
+            <option value="A4">A4 (210 × 297 mm)</option>
+            <option value="Letter">Letter (8.5 × 11 inches)</option>
+        </select>
+    </div>
+
+    <!-- Choose Quantity -->
+    <div class="form-group">
+        <label>Quantity:</label>
+        <input type="number" id="quantity" min="50" value="100">
+    </div>
+
+    <!-- Preview & Submit -->
+    <button class="btn btn-primary" onclick="previewOrder()">Preview Order</button>
+    <button class="btn btn-primary" onclick="placeOrder()">Place Order</button>
+
+    <!-- Preview Section -->
+    <div id="previewSection">
+        <h3>Order Preview</h3>
+        <img id="previewLogo" src="#" alt="Logo" style="display: none;">
+        <p class="preview-item"><strong>Company Name:</strong> <span id="previewCompany"></span></p>
+        <p class="preview-item"><strong>Address:</strong> <span id="previewAddress"></span></p>
+        <p class="preview-item"><strong>Paper Type:</strong> <span id="previewPaper"></span></p>
+        <p class="preview-item"><strong>Paper Size:</strong> <span id="previewSize"></span></p>
+        <p class="preview-item"><strong>Quantity:</strong> <span id="previewQuantity"></span></p>
+    </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-contact">
+      <h2>Contact Us</h2>
+      <form action="#" method="post" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit" class="contact-button">Send</button>
+      </form>
+    </div>
+    <div class="footer-menu">
+      <h2>Menu</h2>
+     <ul class="nav-links">
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'services' %}">SERVICES</a></li>
+        <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <div class="footer-logo">LOGO</div>
+      <div class="contact-details">
+        <p><i class="fas fa-phone-alt"></i> +1-234-567-890</p>
+        <p><i class="fas fa-envelope"></i> info@printease.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Barnāla, Punjab</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>COPYRIGHT PHANTOM SOLUTIONS</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll(".form-select").forEach((select) => {
+    select.addEventListener("change", function () {
+    });
+  });
+
+  const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+  
+        menuToggle.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+        });
+
+        document.getElementById("logoUpload").addEventListener("change", function(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById("logoPreview");
+        preview.src = reader.result;
+        preview.style.display = "block";
+    };
+    reader.readAsDataURL(event.target.files[0]);
+});
+
+function previewOrder() {
+    document.getElementById("previewCompany").innerText = document.getElementById("companyName").value;
+    document.getElementById("previewAddress").innerText = document.getElementById("address").value;
+    document.getElementById("previewPaper").innerText = document.getElementById("paperType").value;
+    document.getElementById("previewSize").innerText = document.getElementById("paperSize").value;
+    document.getElementById("previewQuantity").innerText = document.getElementById("quantity").value;
+
+    const logo = document.getElementById("logoPreview").src;
+    if (logo) {
+        document.getElementById("previewLogo").src = logo;
+        document.getElementById("previewLogo").style.display = "block";
+        document.getElementById("previewLogo").style.width = "200px";
+        document.getElementById("previewLogo").style.height = "300px";
+    }
+
+    document.getElementById("previewSection").style.display = "block";
+    // document.getElementById("previewSection").style.width = "200px";
+    
+}
+
+function placeOrder() {
+    alert("Your letterhead order has been placed!");
+}
+</script>
+
+</body>
+</html>
