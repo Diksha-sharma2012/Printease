@@ -22,17 +22,19 @@
           <img src="{% static 'assets/logo.png' %}" alt="Logo">
       </div>
          <ul class="nav-links">
-        <li><a href="{% url 'index' %}">HOME</a></li>
-        <li><a href="{% url 'services' %}">SERVICES</a></li>
-        <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
-<!--        <li><a href="{% url 'contactus' %}">CONTACT</a></li>-->
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-        {% else %}
-            <li><a href="{% url 'login' %}">LOGIN</a></li>
-            <li><a href="{% url 'signup' %}">SIGN UP</a></li>
-        {% endif %}
-      </ul>
+    <li><a href="{% url 'index' %}">HOME</a></li>
+    <li><a href="{% url 'services' %}">SERVICES</a></li>
+    <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+    <li><a href="{% url 'admin_login' %}">ADMIN DASHBOARD</a></li>
+
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    {% else %}
+        <li><a href="{% url 'login' %}">USER LOGIN</a></li>
+        <li><a href="{% url 'signup' %}">USER SIGN UP</a></li>
+    {% endif %}
+</ul>
+
      
       <div class="menu-toggle">
           <span></span>

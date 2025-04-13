@@ -1,54 +1,269 @@
-<table>
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Logo</th>
-            <th>Order Type</th>
-            <th>Company</th>
-            <th>Address</th>
-            <th>Paper Type</th>
-            <th>Size</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for order in billbook_orders %}
-        <tr>
-            <td>{{ order.user.username }}</td>
-            <td>
-                {% if order.logo %}
-                    <img src="{{ order.logo.url }}"
-                         alt="Company Logo"
-                         class="order-image"
-                         onclick="showModal(this.src)">
-                {% else %}
-                    <span class="no-logo">-</span>
-                {% endif %}
-            </td>
-            <td>{{ order.order_type }}</td>
-            <td>{{ order.company_name }}</td>
-            <td>{{ order.address|truncatechars:20 }}</td>
-            <td>{{ order.paper_type }}</td>
-            <td>{{ order.paper_size }}</td>
-            <td>{{ order.quantity }}</td>
-            <td>
-                <form method="post" action="{% url 'delete-order-letter' order.id %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="delete-btn"
-                            onclick="return confirm('Are you sure you want to delete this order?')">
-                        <i class="fas fa-trash"></i>
-                        Delete
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="9" style="text-align: center; padding: 20px; color: #666;">
-                No orders found
-            </td>
-        </tr>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letterhead Order Form</title>
+    <link rel="stylesheet" href="{% static 'STYLES/STYLES.CSS' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #logoPreview {
+            max-width: 150px;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        #previewSection {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            display: none;
+            text-align: left;
+        }
+        .preview-item { margin-bottom: 8px; }
+        .alert-container { margin: 20px auto; width: 50%; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+          <img src="{% static 'assets/logo.png' %}" alt="Logo" />
+        </div>
+         <ul class="nav-links">
+    <li><a href="{% url 'index' %}">HOME</a></li>
+    <li><a href="{% url 'services' %}">SERVICES</a></li>
+    <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+    <li><a href="{% url 'admin_login' %}">ADMIN DASHBOARD</a></li>
+
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    {% else %}
+        <li><a href="{% url 'login' %}">USER LOGIN</a></li>
+        <li><a href="{% url 'signup' %}">USER SIGN UP</a></li>
+    {% endif %}
+</ul>
+
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-hero service-hero">
+        <h1>LETTER HEAD</h1>
+        <p>Making a Lasting Impression From the First Words</p>
+    </section>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endfor %}
-    </tbody>
-</table>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <h2>Order Your Letterhead</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Upload Logo -->
+            <div class="form-group">
+                <label>Upload Logo:</label>
+                <input type="file" id="logoUpload" name="logo" accept="image/*">
+                <img id="logoPreview" src="#" alt="Logo Preview" style="display: none;">
+            </div>
+
+            <!-- Company Details -->
+            <div class="form-group">
+                <label>Company Name:</label>
+                <input type="text" id="companyName" name="company_name" placeholder="Enter Company Name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Address:</label>
+                <input type="text" id="address" name="address" placeholder="Enter Address" required>
+            </div>
+
+            <!-- Paper Selection -->
+            <div class="form-group">
+                <label>Paper Type:</label>
+                <select id="paperType" name="paper_type" required>
+                    <option value="">Select Paper Type</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Premium">Premium</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Paper Size:</label>
+                <select id="paperSize" name="paper_size" required>
+                    <option value="">Select Paper Size</option>
+                    <option value="A4">A4 (210 × 297 mm)</option>
+                    <option value="Letter">Letter (8.5 × 11 inches)</option>
+                </select>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+                <label>Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="50" value="100" required>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group button-group">
+                <button type="button" class="btn btn-secondary" onclick="previewOrder()">Preview Order</button>
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            </div>
+
+            <!-- Preview Section -->
+            <div id="previewSection">
+                <h3>Order Preview</h3>
+                <img id="previewLogo" src="#" alt="Logo" style="display: none;">
+                <p class="preview-item"><strong>Company Name:</strong> <span id="previewCompany"></span></p>
+                <p class="preview-item"><strong>Address:</strong> <span id="previewAddress"></span></p>
+                <p class="preview-item"><strong>Paper Type:</strong> <span id="previewPaper"></span></p>
+                <p class="preview-item"><strong>Paper Size:</strong> <span id="previewSize"></span></p>
+                <p class="preview-item"><strong>Quantity:</strong> <span id="previewQuantity"></span></p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+    <div class="footer-contact">
+      <h2>Contact Us</h2>
+      <form action="#" method="post" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit" class="contact-button">Send</button>
+      </form>
+    </div>
+    <div class="footer-menu">
+      <h2>Menu</h2>
+     <ul class="nav-links">
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'services' %}">SERVICES</a></li>
+        <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <div class="footer-logo">LOGO</div>
+      <div class="contact-details">
+        <p><i class="fas fa-phone-alt"></i> +1-234-567-890</p>
+        <p><i class="fas fa-envelope"></i> info@printease.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Barnāla, Punjab</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>COPYRIGHT PHANTOM SOLUTIONS</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Logo Preview
+        document.getElementById("logoUpload").addEventListener("change", function(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById("logoPreview");
+                preview.src = reader.result;
+                preview.style.display = "block";
+            };
+            if (this.files[0]) {
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // Order Preview
+        function previewOrder() {
+            document.getElementById("previewCompany").textContent = document.getElementById("companyName").value;
+            document.getElementById("previewAddress").textContent = document.getElementById("address").value;
+            document.getElementById("previewPaper").textContent = document.getElementById("paperType").value;
+            document.getElementById("previewSize").textContent = document.getElementById("paperSize").value;
+            document.getElementById("previewQuantity").textContent = document.getElementById("quantity").value;
+
+            const logo = document.getElementById("logoPreview").src;
+            if (logo && logo !== "#") {
+                document.getElementById("previewLogo").src = logo;
+                document.getElementById("previewLogo").style.display = "block";
+            }
+
+            document.getElementById("previewSection").style.display = "block";
+        }
+
+        // Form Validation
+        document.querySelector("form").addEventListener("submit", function(e) {
+            const requiredFields = [
+                'company_name',
+                'address',
+                'paper_type',
+                'paper_size',
+                'quantity'
+            ];
+
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                const element = document.querySelector(`[name="${field}"]`);
+                if (!element.value.trim()) {
+                    isValid = false;
+                    element.style.borderColor = 'red';
+                } else {
+                    element.style.borderColor = '#ccc';
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields!');
+            }
+        });
+
+        // Mobile Menu Toggle
+        document.querySelector(".menu-toggle").addEventListener("click", () => {
+            document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
+</body>
+</html>

@@ -3,10 +3,35 @@
 <head>
     <title>Bill Book Orders</title>
     <style>
-        body {
+         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 40px;
             background-color: #f8f9fa;
+        }
+
+        /* Add alert styles */
+        .messages {
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
         }
 
         h2 {
@@ -74,17 +99,19 @@
         }
 
         .delete-btn {
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
 
         .delete-btn:hover {
             background-color: #cc0000;
@@ -141,6 +168,21 @@
 
 <h2>Letter-Head Orders</h2>
 
+
+<!-- Messages Container -->
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
 <div id="imageModal" class="modal">
     <span class="close">&times;</span>
     <img class="modal-content" id="expandedImg">
@@ -160,46 +202,44 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
-        {% for order in billbook_orders %}
-        <tr>
-            <td>{{ order.user.username }}</td>
+ <tbody>
+    {% for order in letterhead_orders %}  <!-- Changed from billbook_orders -->
+    <tr>
+        <td>{{ order.user.username }}</td>
+        <td>
+            {% if order.logo %}
+                <img src="{{ order.logo.url }}"
+                     alt="Company Logo"
+                     class="order-image"
+                     onclick="showModal(this.src)">
+            {% else %}
+                <span class="no-logo">-</span>
+            {% endif %}
+        </td>
+        <td>{{ order.order_type }}</td>
+        <td>{{ order.company_name }}</td>
+        <td>{{ order.address|truncatechars:20 }}</td>
+        <td>{{ order.paper_type }}</td>
+        <td>{{ order.paper_size }}</td>
+        <td>{{ order.quantity }}</td>
             <td>
-                {% if order.logo %}
-                    <img src="{{ order.logo.url }}"
-                         alt="Company Logo"
-                         class="order-image"
-                         onclick="showModal(this.src)">
-                {% else %}
-                    <span class="no-logo">-</span>
-                {% endif %}
+                    <form method="POST" action="{% url 'delete-order-letter' order.id %}" style="display: inline;">
+        {% csrf_token %}
+         <button type="submit" class="delete-btn"
+        onclick="event.stopPropagation(); return confirm('Are you sure?')">
+    <i class="fas fa-trash-alt"></i> Delete
+</button>
+                    </form>
             </td>
-            <td>{{ order.order_type }}</td>
-            <td>{{ order.company_name }}</td>
-            <td>{{ order.address|truncatechars:20 }}</td>
-            <td>{{ order.paper_type }}</td>
-            <td>{{order.paper_size}}</td>
-            <td>{{ order.quantity }}</td>
-            <td>{{ order.page_per_book }}</td>
-            <td>
-                <form method="post" action="{% url 'delete-order-letter' order.id %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="delete-btn"
-                            onclick="return confirm('Are you sure you want to delete this order?')">
-                        <i class="fas fa-trash"></i>
-                        Delete
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="10" style="text-align: center; padding: 20px; color: #666;">
-                No orders found
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="9" style="text-align: center; padding: 20px; color: #666;">
+            No orders found
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
 </table>
 
 <script>
@@ -215,6 +255,15 @@
     span.onclick = () => modal.style.display = "none";
     window.onclick = (event) => event.target == modal && (modal.style.display = "none");
     document.addEventListener('keydown', (e) => e.key === 'Escape' && (modal.style.display = "none"));
+
+
+    // Add to existing script
+document.querySelectorAll('form[method="POST"]').forEach(form => {
+    form.addEventListener('submit', (e) => {
+        console.log('Form submitted:', form.action);
+        // Optional: e.preventDefault(); // For debugging
+    });
+});
 </script>
 
 </body>

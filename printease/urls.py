@@ -49,6 +49,9 @@ urlpatterns = [
 
 
 ############################DASHBOARD################################################
+
+path('admin-login/', views.admin_login, name='admin_login'),
+
     # Admin Dashboard URLs
     path('admin-dashboard/',
          views.admin_dashboard,

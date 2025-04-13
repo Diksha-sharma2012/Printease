@@ -75,7 +75,7 @@ class OrderLetterModel(models.Model):
     paper_type = models.CharField(max_length=100, choices=PAPER_TYPE_CHOICES)
     paper_size = models.CharField(max_length=50, choices=PAPER_SIZE_CHOICES)
     quantity = models.PositiveIntegerField(default=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="order_letter_model", on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='letterhead_logos/', blank=True, null=True)
 
     def __str__(self):

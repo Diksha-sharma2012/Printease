@@ -11,6 +11,8 @@ from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from .forms import SignUpForm, CustomLoginForm
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_http_methods
+
 
 
 
@@ -274,7 +276,7 @@ def letter_heads_view(request):
             letter_head.save()
 
             messages.success(request, 'Order placed successfully!')
-            return redirect('view-letter-orders')
+            return redirect('letter-heads')
 
         except Exception as e:
             messages.error(request, f'Error processing order: {str(e)}')
@@ -380,8 +382,28 @@ def checkout_view(request):
 
 
 ############################## DASHBOARD ##################################
+
+
+def admin_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('admin-dashboard')
+        else:
+            messages.error(request, 'Invalid credentials or not authorized.')
+            return redirect('admin_login')
+
+    return render(request, 'HUGLI-1-2-3/dashboard/admin_login.html')
+
+
+
 @staff_member_required
-# @login_required
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def admin_dashboard(request):
     return render(request, 'HUGLI-1-2-3/dashboard/admin_dashboard.html')
 
@@ -467,36 +489,35 @@ def view_billbooks(request):
 
 
 @staff_member_required
-# @login_required
+@require_http_methods(["POST"])
 def delete_order_bill_letter(request, order_id):
     if request.method == 'POST':
         try:
             order = OrderBillModel.objects.get(id=order_id)
-            # Optional: Add permission check (e.g., user can only delete their own orders)
-            if order.user == request.user:
-                order.delete()
-        except OrderBillModel.DoesNotExist:
-            pass
-    return redirect('view-bill-letter-orders')
+            order.delete()
+            messages.success(request, 'Bill book order deleted successfully')
+        except Exception as e:
+            messages.error(request, f'Error deleting order: {str(e)}')
+    return redirect('view-bill-orders')
 
 
 
 @staff_member_required
-# @login_required
 def view_letterhead(request):
     letterhead_orders = OrderLetterModel.objects.all().order_by('-id')
     return render(request,
-                 'HUGLI-1-2-3/dashboard/view_letterhead.html',  # Ensure correct template name
-                 {'billbook_orders': letterhead_orders})  # Match template variable name
+                 'HUGLI-1-2-3/dashboard/view_letterhead.html',
+                 {'letterhead_orders': letterhead_orders})
 
 @staff_member_required
-# @login_required
+@require_http_methods(["POST"])
 def delete_order_letter(request, order_id):
     if request.method == 'POST':
         try:
-            order = OrderLetterModel.objects.get(id=order_id)  # Use OrderLetterModel
-            if order.user == request.user:
-                order.delete()
-        except OrderLetterModel.DoesNotExist:
-            pass
+            order = OrderLetterModel.objects.get(id=order_id)
+            order.delete()
+            messages.success(request, 'Letterhead order deleted successfully')
+        except Exception as e:
+            messages.error(request, f'Error deleting order: {str(e)}')
     return redirect('view-letter-orders')
+
