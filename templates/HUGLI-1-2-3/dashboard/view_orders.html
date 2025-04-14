@@ -167,8 +167,8 @@
                   <td>{{ order.notes|default:"-" }}</td>
                   <td>{{ order.order_date|date:"d M Y, h:i A" }}</td>
                   <td>
-                       <form method="POST" action="{% url 'delete-order-bill' order.id %}" style="display: inline;">
-        {% csrf_token %}  <!-- THIS WAS MISSING -->
+                       <form method="POST" action="{% url 'delete-order' order.id %}" style="display: inline;">
+        {% csrf_token %}
         <button type="submit" class="delete-btn"
                 onclick="return confirm('Are you sure?')">
             <i class="fas fa-trash"></i> Delete

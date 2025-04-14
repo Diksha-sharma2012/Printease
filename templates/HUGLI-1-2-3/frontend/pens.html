@@ -68,13 +68,14 @@
         </div>
         <h2>LASER PRINTING</h2>
         <form method="post" class="card-form">
+            <input type="hidden" value="LASER PRINTING" name="product_name">
             <div class="service-option">
                 <h3>High-precision laser engraved pens</h3>
                 <p>Production Time: 5-7 working days</p>
 
                 <div class="form-group mb-3">
                     <label>Pen Color:</label>
-                    <select class="form-select" id="laser-pen-color" name="pens" required>
+                    <select class="form-select" id="laser-pen-color" name="product_type" required>
                         <option selected disabled value="">Select an Option</option>
                         <option value="Black">Black</option>
                         <option value="Blue">Blue</option>
@@ -113,6 +114,7 @@
         </div>
         <h2>SINGULAR COLORS</h2>
         <form method="post" class="card-form">
+            <input type="hidden" name="product_name" value="SINGULAR COLORS"/>
             <div class="service-option">
                 <h3>Vibrant single-color printed pens</h3>
                 <p>Production Time: 4-6 working days</p>
@@ -146,7 +148,7 @@
                                 data-color="yellow"
                         ></div>
                     </div>
-                    <input type="hidden" name="pens" id="solid-pen-color" value="black"/>
+                    <input type="hidden" name="product_type" id="solid-pen-color" value="black"/>
                 </div>
 
                 <div class="quantity-selector">
@@ -176,13 +178,14 @@
         </div>
         <h2>PEN PACKING BOX</h2>
         <form method="post" class="card-form">
+            <input type="hidden" value="PEN PACKING BOX" name="product_name">
             <div class="service-option">
                 <h3>Premium packaging for your branded pens</h3>
                 <p>Production Time: 7-10 working days</p>
 
                 <div class="form-group mb-3">
                     <label>Box Type:</label>
-                    <select class="form-select" id="box-type" name="pens" required>
+                    <select class="form-select" id="box-type" name="product_type" required>
                         <option selected disabled value="">Select an Option</option>
                         <option value="Standard (10 pens)">Standard (10 pens)</option>
                         <option value="Deluxe (25 pens)">Deluxe (25 pens)</option>

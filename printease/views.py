@@ -16,6 +16,7 @@ from django.views.decorators.http import require_http_methods
 
 
 
+
 ######################################SIGNIN-LOGIN#########################################
 # Signup View
 def signup_view(request):
@@ -178,40 +179,59 @@ def atm_pouches_view(request):
 
 
 def digital_paper_view(request):
+    if request.method == "POST":
+        # digital_paper = request.POST.get("digital-paper")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
+        quantity = request.POST.get("quantity")
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type, "quantity": quantity,
+                                                                                           "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/digital-paper.html')
 
 
 def envelopes_view(request):
     if request.method == "POST":
-        envelopes = request.POST.get("envelopes")
+        # envelopes = request.POST.get("envelopes")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': envelopes, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html',
+                      {'product_type': product_type, "quantity": quantity,
+                       "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/envelopes.html')
 
 
 def files_view(request):
     if request.method == "POST":
-        files = request.POST.get("files")
+        # files = request.POST.get("files")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': files, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type, "quantity": quantity,
+                       "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/files.html')
 
 
 def garment_tags_view(request):
     if request.method == "POST":
-        pamphlet_paper = request.POST.get("garment-tags")
+        # pamphlet_paper = request.POST.get("garment-tags")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
-        print(pamphlet_paper)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': pamphlet_paper, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type, "quantity": quantity,
+                       "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/garment-tags.html')
 
 
 def pamphlets_view(request):
     if request.method == "POST":
-        pamphlet_paper = request.POST.get("pamphlet-paper")
+        # pamphlet_paper = request.POST.get("pamphlet-paper")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
-        print(pamphlet_paper)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': pamphlet_paper, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type,
+                                                                      "quantity": quantity,
+                                                                      "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/pamphlets.html')
 
 
@@ -229,21 +249,28 @@ def visiting_cards_view(request, ):
 
 def pens_view(request):
     if request.method == "POST":
-        cards = request.POST.get("pens")
+        # cards = request.POST.get("pens")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
         print(quantity)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': cards, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type,
+                                                                      "quantity": quantity,
+                                                                      "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/pens.html')
 
 
 def stickers_view(request):
     if request.method == "POST":
-        card = request.POST.get("card")
+        # card = request.POST.get("card")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
         print(quantity)
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': card, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type,
+                                                                      "quantity": quantity,
+                                                                      "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/stickers.html')
-
 
 
 def letter_heads_view(request):
@@ -289,9 +316,13 @@ def letter_heads_view(request):
 
 def shooting_view(request):
     if request.method == "POST":
-        card = request.POST.get("target")
+        # card = request.POST.get("target")
+        product_type = request.POST.get("product_type")
+        product_name = request.POST.get("product_name")
         quantity = request.POST.get("quantity")
-        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'cards': card, "quantity": quantity})
+        return render(request, 'HUGLI-1-2-3/frontend/checkout.html', {'product_type': product_type,
+                                                                      "quantity": quantity,
+                                                                      "product_name": product_name})
     return render(request, 'HUGLI-1-2-3/frontend/targets.html')
 
 
