@@ -2,13 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# class UserModel(models.Model):
-#     email = models.EmailField(max_length=278,unique=True)
-#     password = models.CharField(max_length=80)
-#     date_joined= models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f"user model {self.email}"
 
 class FilesUpload(models.Model):
     file = models.FileField(upload_to='uploads/')
@@ -46,6 +39,7 @@ class OrderBillModel(models.Model):
     quantity=models.PositiveIntegerField(default=1, null=True)
     number_of_book = models.IntegerField(default=1, null=True)
     page_per_book = models.IntegerField(default=1, null=True)
+    order_date = models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User, related_name="order_bill_model", on_delete=models.CASCADE)
 
     logo = models.ImageField(
@@ -75,6 +69,7 @@ class OrderLetterModel(models.Model):
     paper_type = models.CharField(max_length=100, choices=PAPER_TYPE_CHOICES)
     paper_size = models.CharField(max_length=50, choices=PAPER_SIZE_CHOICES)
     quantity = models.PositiveIntegerField(default=100)
+    order_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, related_name="order_letter_model", on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='letterhead_logos/', blank=True, null=True)
 

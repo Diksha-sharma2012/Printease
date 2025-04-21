@@ -359,6 +359,7 @@ def bill_books_view(request):
         )
         bill_book.save()  # This will save the file to MEDIA_ROOT/billbook_logos/
 
+        messages.success(request, "Your order has been placed successfully!")
         return redirect('bill-books')
 
     # Fetch all orders for display
@@ -406,7 +407,9 @@ def checkout_view(request):
             user=user_model
         )
         order.save()
-        return render(request, 'HUGLI-1-2-3/frontend/services.html')
+        order.save()
+        messages.success(request, "Your order has been placed successfully!")
+        return redirect('services')
     else:
         print("get")
     return render(request, 'HUGLI-1-2-3/frontend/checkout.html')
@@ -493,13 +496,13 @@ def files_with_users_view(request):
     return render(request, 'files_table.html', {'files': files})
 
 
-@staff_member_required
-# @login_required
-def delete_uploaded_file(request, file_id):
-    file = get_object_or_404(FilesUpload, id=file_id)
-    file.file.delete()
-    file.delete()
-    return redirect('view-uploaded-files')
+# @staff_member_required
+# # @login_required
+# def delete_uploaded_file(request, file_id):
+#     file = get_object_or_404(FilesUpload, id=file_id)
+#     file.file.delete()
+#     file.delete()
+#     return redirect('view-uploaded-files')
 
 
 @staff_member_required
@@ -552,3 +555,88 @@ def delete_order_letter(request, order_id):
             messages.error(request, f'Error deleting order: {str(e)}')
     return redirect('view-letter-orders')
 
+
+#####################################User Dashboard#########################################################
+
+@login_required
+def user_dashboard(request):
+    order_type_filter = request.GET.get('order_type', 'All')
+
+    # Filter the orders based on selected order type
+    if order_type_filter == 'General':
+        orders = Order.objects.filter(user=request.user).order_by('-order_date')
+        bill_orders = OrderBillModel.objects.none()
+        letter_orders = OrderLetterModel.objects.none()
+    elif order_type_filter == 'BillBook':
+        orders = Order.objects.none()
+        bill_orders = OrderBillModel.objects.filter(user=request.user).order_by('-order_date')
+        letter_orders = OrderLetterModel.objects.none()
+    elif order_type_filter == 'Letterhead':
+        orders = Order.objects.none()
+        bill_orders = OrderBillModel.objects.none()
+        letter_orders = OrderLetterModel.objects.filter(user=request.user).order_by('-order_date')
+    else:  # All orders
+        orders = Order.objects.filter(user=request.user).order_by('-order_date')
+        bill_orders = OrderBillModel.objects.filter(user=request.user).order_by('-order_date')
+        letter_orders = OrderLetterModel.objects.filter(user=request.user).order_by('-order_date')
+
+    context = {
+        'orders': orders,
+        'bill_orders': bill_orders,
+        'letter_orders': letter_orders,
+        'order_type_filter': order_type_filter,
+    }
+    return render(request, 'HUGLI-1-2-3/user-dashboard/user_dashboard.html', context)
+
+
+# View for displaying specific General order details
+@login_required
+def view_orders_user(request, order_id):
+    order = Order.objects.get(id=order_id)
+    return render(request, 'HUGLI-1-2-3/user-dashboard/view_order.html', {'order': order})
+
+
+
+
+# View for displaying specific Bill Book order details
+@login_required
+def view_bill_order(request, order_id):
+    order = get_object_or_404(OrderBillModel, pk=order_id, user=request.user)
+    context = {'order': order}
+    return render(request, 'HUGLI-1-2-3/user-dashboard/view_bill_orders.html', context)
+
+# View for displaying specific Letterhead order details
+@login_required
+def view_letter_order(request, order_id):
+    order = get_object_or_404(OrderLetterModel, pk=order_id, user=request.user)
+    context = {'order': order}
+    return render(request, 'HUGLI-1-2-3/user-dashboard/view_letter_order.html', context)
+
+# View for displaying uploaded files
+@login_required
+def view_uploaded_files_user(request):
+    files = FilesUpload.objects.filter(user=request.user)
+    context = {'files': files}
+    return render(request, 'HUGLI-1-2-3/user-dashboard/view_uploaded_files.html', context)
+
+# View for canceling an order
+@login_required
+def cancel_order(request, order_id, order_type):
+    if order_type == 'General':
+        order = get_object_or_404(Order, pk=order_id, user=request.user)
+    elif order_type == 'BillBook':
+        order = get_object_or_404(OrderBillModel, pk=order_id, user=request.user)
+    elif order_type == 'Letterhead':
+        order = get_object_or_404(OrderLetterModel, pk=order_id, user=request.user)
+    else:
+        return HttpResponse("Invalid order type", status=400)
+
+    # Optionally, you can add a status field to mark the order as canceled
+    if order_type == 'General':
+        order.status = 'Canceled'
+        order.save()
+    else:
+        order.delete()
+
+    # Redirect back to the user dashboard with a success message
+    return redirect('user_dashboard')

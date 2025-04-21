@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
     <style>
-        /* Add centering and spacing */
         .centered-form-wrapper {
           display: flex;
           justify-content: center;
@@ -81,18 +80,17 @@
         <img src="{% static 'assets/logo.png' %}" alt="PrintEase Logo"/>
     </div>
     <ul class="nav-links">
-    <li><a href="{% url 'index' %}">HOME</a></li>
-    <li><a href="{% url 'services' %}">SERVICES</a></li>
-    <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
-    <li><a href="{% url 'admin_login' %}">ADMIN DASHBOARD</a></li>
-
-    {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-    {% else %}
-        <li><a href="{% url 'login' %}">USER LOGIN</a></li>
-        <li><a href="{% url 'signup' %}">USER SIGN UP</a></li>
-    {% endif %}
-</ul>
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'services' %}">SERVICES</a></li>
+        <li><a href="{% url 'aboutus' %}">ABOUT US</a></li>
+        <li><a href="{% url 'admin_login' %}">ADMIN DASHBOARD</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">USER LOGIN</a></li>
+            <li><a href="{% url 'signup' %}">USER SIGN UP</a></li>
+        {% endif %}
+    </ul>
 
     <div class="menu-toggle">
         <span></span><span></span><span></span>
@@ -107,6 +105,18 @@
     });
 </script>
 
+<!-- Flash Messages -->
+{% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
 <!-- Centered Forms Section -->
 <div class="container centered-form-wrapper">
     <!-- Checkout Container -->
@@ -116,11 +126,18 @@
             <h3 class="text-center mb-4">Selected Items</h3>
             <div class="selected-items">
                 <div class="item">
-                    <span class="item-name">{%if product_type%}{{product_type}}{%endif%}</span>
-                    <input type="hidden" name="product_type" value="{{product_type}}">
-                    <input type="hidden" name="product_name" value="{{product_name}}">
-                    <input type="number" class="form-control quantity" value="{%if quantity%}{{quantity}}{%else %}1{%endif%}" min="1"/>
+                    <span class="item-name">{% if product_type %}{{ product_type }}{% endif %}</span>
+                    <input type="hidden" name="product_type" value="{{ product_type }}">
+                    <input type="hidden" name="product_name" value="{{ product_name }}">
+                    <input type="number" class="form-control quantity"
+                           value="{% if quantity %}{{ quantity }}{% else %}1{% endif %}"
+                           min="1" onchange="updateQuantity(this)"/>
                 </div>
+                <script>
+                    function updateQuantity(input) {
+                        console.log("New quantity:", input.value);
+                    }
+                </script>
             </div>
         </div>
 
@@ -133,24 +150,18 @@
             <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required/>
 
             <label for="phone">Phone Number</label>
-            <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter your phone number"
-                   required/>
-
+            <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter your phone number" required/>
 
             <label for="address">Full Address</label>
-            <input type="text" class="form-control" name="address" id="address" placeholder="Enter your address"
-                   required/>
+            <input type="text" class="form-control" name="address" id="address" placeholder="Enter your address" required/>
 
             <label for="pincode">Pin Code</label>
-            <input type="number" class="form-control" name="pincode" id="pincode" placeholder="Enter your PinCode"
-                   required/>
+            <input type="number" class="form-control" name="pincode" id="pincode" placeholder="Enter your PinCode" required/>
 
             <label for="notes">Additional Notes</label>
-            <textarea class="form-control" name="notes" id="notes" rows="3"
-                      placeholder="Any special requests?"></textarea>
+            <textarea class="form-control" name="notes" id="notes" rows="3" placeholder="Any special requests?"></textarea>
 
             <button type="submit" class="btn btn-success w-100 mt-3">Submit Order</button>
-
         </div>
     </form>
 </div>
