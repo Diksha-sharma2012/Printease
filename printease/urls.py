@@ -109,7 +109,7 @@ path('admin-login/', views.admin_login, name='admin_login'),
     path('order/view/billbook/<int:order_id>/', views.view_bill_order, name='view_bill_order'),
     path('order/view/letterhead/<int:order_id>/', views.view_letter_order, name='view_letter_order'),
     path('files/', views.view_uploaded_files_user, name='view_uploaded_files'),
-    path('order/cancel/<int:order_id>/<str:order_type>/', views.cancel_order, name='cancel_order'),
-
+    # path('order/cancel/<int:order_id>/<str:order_type>/', views.cancel_order, name='cancel_order'),
+     path('base/', views.base_view, name='base' )
 ]
 

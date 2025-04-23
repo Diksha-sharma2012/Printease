@@ -129,15 +129,10 @@
                     <span class="item-name">{% if product_type %}{{ product_type }}{% endif %}</span>
                     <input type="hidden" name="product_type" value="{{ product_type }}">
                     <input type="hidden" name="product_name" value="{{ product_name }}">
-                    <input type="number" class="form-control quantity"
-                           value="{% if quantity %}{{ quantity }}{% else %}1{% endif %}"
-                           min="1" onchange="updateQuantity(this)"/>
+                    <input type="number" class="form-control quantity" name="quantity"
+                           {% if quantity %} value="{{ quantity }}"{% endif %}/>
                 </div>
-                <script>
-                    function updateQuantity(input) {
-                        console.log("New quantity:", input.value);
-                    }
-                </script>
+
             </div>
         </div>
 

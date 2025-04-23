@@ -640,3 +640,11 @@ def cancel_order(request, order_id, order_type):
 
     # Redirect back to the user dashboard with a success message
     return redirect('user_dashboard')
+
+
+
+
+
+def base_view(request):
+    return render(request, 'HUGLI-1-2-3/frontend/base.html')
+
